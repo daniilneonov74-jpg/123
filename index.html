@@ -42,6 +42,7 @@
       z-index: 5;
     }
     .header-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
     .brand { display: flex; align-items: center; gap: 13px; font-weight: 800; letter-spacing: .12em; }
     .brand-mark {
       width: 40px; height: 40px; display: grid; place-items: center;
@@ -51,6 +52,15 @@
     .brand small { display: block; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .16em; margin-top: 3px; }
     .status { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 13px; }
     .status i { width: 7px; height: 7px; border-radius: 99px; background: var(--green); box-shadow: 0 0 0 4px rgba(111,128,102,.13); }
+    .top-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(164, 95, 67, .25);
+      border-radius: 999px; background: var(--card); color: var(--ink);
+      padding: 8px 12px; font-size: 12px; line-height: 1.4;
+      box-shadow: 0 10px 22px rgba(46, 41, 37, .05);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .top-link:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(46, 41, 37, .09); }
 
     .hero { padding: 75px 0 45px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: end; }
     .eyebrow { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .19em; font-size: 11px; }
@@ -98,16 +108,23 @@
     .resource strong { display: block; margin-bottom: 4px; }
     .resource span { color: var(--muted); font-size: 13px; }
     .arrow { color: var(--accent); font-size: 20px; }
-    .media-section { display: grid; gap: 34px; }
-    .media-block h3 { margin: 0 0 14px; font-family: Georgia, serif; font-size: 26px; font-weight: 500; }
-    .photo-collage, .video-collage { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .media-tile { overflow: hidden; min-height: 170px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
-    .photo-collage .media-tile:nth-child(2) { transform: translateY(18px); }
-    .photo-collage img { display: block; width: 100%; height: 220px; object-fit: cover; transition: transform .3s ease; }
-    .photo-collage .media-tile:hover img { transform: scale(1.04); }
-    .photo-collage .media-tile { cursor: zoom-in; }
-    .video-tile { position: relative; }
-    .video-collage video { display: block; width: 100%; height: 210px; object-fit: cover; background: #2e2925; }
+    .media-section { display: grid; gap: 28px; }
+    .media-block h3 { width: min(100%, 900px); margin: 0 auto 12px; font-family: Georgia, serif; font-size: 26px; font-weight: 500; }
+    .media-carousel { position: relative; width: min(100%, 900px); margin: 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--card); box-shadow: 0 10px 24px rgba(46,41,37,.06); }
+    .media-track { display: flex; transition: transform .3s ease; }
+    .media-tile { position: relative; min-width: 100%; margin: 0; overflow: hidden; aspect-ratio: 16 / 9; min-height: 0; border: 0; background: var(--card); }
+    .photo-carousel .media-tile { cursor: zoom-in; }
+    .photo-carousel img, .video-tile video { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .photo-carousel img { background: #f2e6d7; transition: transform .3s ease; }
+    .video-tile video { background: #2e2925; }
+    .carousel-button { position: absolute; top: 50%; z-index: 1; width: 38px; height: 38px; border: 0; border-radius: 50%; color: var(--paper); background: rgba(46,41,37,.78); cursor: pointer; transform: translateY(-50%); }
+    .carousel-button:hover { background: var(--accent); }
+    .carousel-button.previous { left: 12px; }
+    .carousel-button.next { right: 12px; }
+    .carousel-dots { display: flex; justify-content: center; gap: 7px; padding: 12px; background: var(--card); }
+    .carousel-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: var(--line); cursor: pointer; }
+    .carousel-dot.active { background: var(--accent); transform: scale(1.25); }
+    .photo-carousel .media-tile:hover img { transform: scale(1.02); }
     .fullscreen-button { position: absolute; right: 10px; bottom: 10px; border: 0; border-radius: 8px; padding: 7px 10px; color: #fff; background: rgba(46,41,37,.78); cursor: pointer; }
     .fullscreen-button:hover { background: var(--accent); }
     .image-modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 28px; background: rgba(28,23,20,.88); opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease; }
@@ -116,6 +133,23 @@
     .modal-close { position: absolute; top: 18px; right: 22px; border: 0; color: #fff; background: transparent; cursor: pointer; font-size: 34px; line-height: 1; }
     .coming-soon { min-height: 240px; display: grid; place-items: center; padding: 34px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); text-align: center; }
     .coming-soon p { max-width: 620px; margin: 0; font-family: Georgia, serif; color: var(--ink); font-size: clamp(24px, 4vw, 42px); line-height: 1.15; }
+    .homework-layout { display: grid; gap: 18px; }
+    .homework-form { display: grid; grid-template-columns: 1fr 1.5fr 180px auto; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+    .homework-form input, .homework-form select { min-width: 0; border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; color: var(--ink); background: #fffdf8; }
+    .homework-form button { border: 0; border-radius: 9px; padding: 11px 16px; color: var(--paper); background: var(--ink); cursor: pointer; font-weight: 700; }
+    .homework-form button:hover { background: var(--accent); }
+    .homework-status { min-height: 18px; color: var(--muted); font-size: 13px; }
+    .homework-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .homework-card { display: grid; grid-template-columns: 14px 1fr; gap: 12px; padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+    .traffic-light { width: 14px; height: 14px; margin-top: 4px; border-radius: 50%; background: #aaa; box-shadow: 0 0 0 5px rgba(170,170,170,.14); }
+    .homework-card.green .traffic-light { background: #6f9c63; box-shadow: 0 0 0 5px rgba(111,156,99,.16); }
+    .homework-card.yellow .traffic-light { background: #d7a83e; box-shadow: 0 0 0 5px rgba(215,168,62,.16); }
+    .homework-card.red .traffic-light { background: #c95b4c; box-shadow: 0 0 0 5px rgba(201,91,76,.16); }
+    .homework-card.gray .traffic-light { background: #9c9c9c; box-shadow: 0 0 0 5px rgba(156,156,156,.14); }
+    .homework-card h3 { margin: 0 0 7px; font-size: 16px; }
+    .homework-card p { margin: 0 0 8px; color: var(--muted); line-height: 1.45; font-size: 14px; }
+    .homework-card time { color: var(--accent); font-size: 12px; font-weight: 800; }
+    @media (max-width: 760px) { .homework-form, .homework-list { grid-template-columns: 1fr; } }
     .duty-layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
     .duty-card { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
     .duty-card h3 { margin: 0 0 15px; font-family: Georgia, serif; font-size: 24px; font-weight: 500; }
@@ -137,8 +171,8 @@
 
     footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 80px; padding: 23px 0 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
     footer strong { color: var(--ink); letter-spacing: .1em; }
-    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 55px; } .schedule { grid-template-columns: repeat(2, 1fr); } .info-grid, .duty-layout { grid-template-columns: 1fr; } .photo-collage, .video-collage { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .shell { width: min(100% - 28px, 1180px); } .header-row { align-items: flex-start; } .status { font-size: 11px; } .tabs { width: 100%; overflow-x: auto; } .tab { flex: 1; white-space: nowrap; padding: 10px 12px; font-size: 13px; } .section-head { align-items: flex-start; flex-direction: column; } .week-switch { width: 100%; } .week-switch button { flex: 1; } .schedule { grid-template-columns: 1fr; } .day { display: grid; grid-template-columns: 110px 1fr; } .day-title { border-right: 1px solid var(--line); border-bottom: 0; } .lesson { min-height: 110px; } .duty-months { grid-template-columns: 1fr; } .duty-row { grid-template-columns: 82px 1fr; } .photo-collage, .video-collage { grid-template-columns: 1fr; } .photo-collage .media-tile:nth-child(2) { transform: none; } footer { margin-top: 50px; flex-direction: column; } }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 55px; } .schedule { grid-template-columns: repeat(2, 1fr); } .info-grid, .duty-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .shell { width: min(100% - 28px, 1180px); } .header-row { align-items: flex-start; } .status { font-size: 11px; } .tabs { width: 100%; overflow-x: auto; } .tab { flex: 1; white-space: nowrap; padding: 10px 12px; font-size: 13px; } .section-head { align-items: flex-start; flex-direction: column; } .week-switch { width: 100%; } .week-switch button { flex: 1; } .schedule { grid-template-columns: 1fr; } .day { display: grid; grid-template-columns: 110px 1fr; } .day-title { border-right: 1px solid var(--line); border-bottom: 0; } .lesson { min-height: 110px; } .duty-months { grid-template-columns: 1fr; } .duty-row { grid-template-columns: 82px 1fr; } footer { margin-top: 50px; flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -148,7 +182,10 @@
         <span class="brand-mark">А26</span>
         <span>АЭС-26<small>ГРУППА МЭИ</small></span>
       </a>
-      <div class="status"><i></i> учебный портал · 2026/27</div>
+      <div class="header-actions">
+        <div class="status"><i></i> учебный портал · 2026/27</div>
+        <a class="top-link" href="https://t.me/addstickers/nuclearpowerplant26" target="_blank" rel="noreferrer noopener">Добавить наш стикер пак в TG</a>
+      </div>
     </div>
   </header>
 
@@ -166,6 +203,7 @@
       <button class="tab active" data-tab="schedule">Расписание</button>
       <button class="tab" data-tab="group">График дежурств</button>
       <button class="tab" data-tab="about">О нас</button>
+      <button class="tab" data-tab="homework">Д/З</button>
       <button class="tab" data-tab="coming-soon">coming soon</button>
     </nav>
 
@@ -192,23 +230,47 @@
       <div class="section-head"><div><h2>О нас</h2><div class="subtle">Моменты группы АЭС-26.</div></div></div>
       <div class="media-section">
         <section class="media-block">
-          <h3>Фотоколлаж</h3>
-          <div class="photo-collage">
-            <figure class="media-tile"><img src="photos/ukB-lXX_hez2hQA6o-yYWBHiegi7RyyspGrkzAJXRknl-yL9B8_zWU53SNt4zmegaCsKJVhr2w-wWJWbUj3emnPf.jpg" alt="Фотография группы АЭС-26"></figure>
-            <figure class="media-tile"><img src="photos/TrBGFNdqcVU1EKIzeWiTS6aIhHkr9BTAbAO2iswN9jV2oNAmkG6oOdqN2Ae2tu96lR12SRXd-x6XzfSSOqaFwj77.jpg" alt="Фотография группы АЭС-26"></figure>
-            <figure class="media-tile"><img src="photos/evSJ49yWxL_lju_97bBP0xyGScqh3G_KpwdkBd677BorPLn4_QggSDhwoE-wOM8q1DAO6IFcrHWNQfhoX8UdTsCv.jpg" alt="Фотография группы АЭС-26"></figure>
-            <figure class="media-tile"><img src="photos/7OTAr1GX4w4dKiUyiFV1gl0FLl7IrDbHgPyZlpjnLkYPU4iF-DoehkP7VkOMbesB_QfiO50tvx7HBrbt-WsCQczd.jpg" alt="Фотография группы АЭС-26"></figure>
+          <h3>Фотографии</h3>
+          <div class="media-carousel photo-carousel" data-carousel>
+            <div class="media-track">
+              <figure class="media-tile"><img src="photos/ukB-lXX_hez2hQA6o-yYWBHiegi7RyyspGrkzAJXRknl-yL9B8_zWU53SNt4zmegaCsKJVhr2w-wWJWbUj3emnPf.jpg" alt="Фотография группы АЭС-26"></figure>
+              <figure class="media-tile"><img src="photos/TrBGFNdqcVU1EKIzeWiTS6aIhHkr9BTAbAO2iswN9jV2oNAmkG6oOdqN2Ae2tu96lR12SRXd-x6XzfSSOqaFwj77.jpg" alt="Фотография группы АЭС-26"></figure>
+              <figure class="media-tile"><img src="photos/evSJ49yWxL_lju_97bBP0xyGScqh3G_KpwdkBd677BorPLn4_QggSDhwoE-wOM8q1DAO6IFcrHWNQfhoX8UdTsCv.jpg" alt="Фотография группы АЭС-26"></figure>
+              <figure class="media-tile"><img src="photos/7OTAr1GX4w4dKiUyiFV1gl0FLl7IrDbHgPyZlpjnLkYPU4iF-DoehkP7VkOMbesB_QfiO50tvx7HBrbt-WsCQczd.jpg" alt="Фотография группы АЭС-26"></figure>
+            </div>
+            <button class="carousel-button previous" type="button" aria-label="Предыдущее фото">‹</button>
+            <button class="carousel-button next" type="button" aria-label="Следующее фото">›</button>
+            <div class="carousel-dots" aria-label="Выбор фотографии"></div>
           </div>
         </section>
         <section class="media-block">
-          <h3>Видеоколлаж</h3>
-          <div class="video-collage">
-            <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/18811509148185.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
-            <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/18811494009369.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
-            <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/18380373756631.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
-            <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/17868205591125.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
+          <h3>Видео</h3>
+          <div class="media-carousel video-carousel" data-carousel>
+            <div class="media-track">
+              <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/18811509148185.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
+              <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/18811494009369.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
+              <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/18380373756631.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
+              <figure class="media-tile video-tile"><video controls preload="metadata" src="photos/17868205591125.mp4"></video><button class="fullscreen-button" type="button" aria-label="Открыть видео на весь экран">⛶</button></figure>
+            </div>
+            <button class="carousel-button previous" type="button" aria-label="Предыдущее видео">‹</button>
+            <button class="carousel-button next" type="button" aria-label="Следующее видео">›</button>
+            <div class="carousel-dots" aria-label="Выбор видео"></div>
           </div>
         </section>
+      </div>
+    </section>
+
+    <section class="panel" id="homework">
+      <div class="section-head"><div><h2>Домашние задания</h2><div class="subtle">Общая доска группы — добавляйте задания, чтобы все их видели.</div></div></div>
+      <div class="homework-layout">
+        <form class="homework-form" id="homework-form">
+          <select id="homework-subject" required aria-label="Предмет"></select>
+          <input id="homework-title" type="text" placeholder="Что нужно сделать?" required maxlength="160">
+          <input id="homework-date" type="date" required aria-label="Дата сдачи">
+          <button type="submit">Добавить Д/З</button>
+        </form>
+        <div class="homework-status" id="homework-status" role="status">Загрузка общей доски…</div>
+        <div class="homework-list" id="homework-list"></div>
       </div>
     </section>
 
@@ -224,7 +286,19 @@
     <img src="" alt="">
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
+    const firebaseConfig = {
+      apiKey: 'AIzaSyBKqtixYVjsUxW-dNjz8Cnl6BAJWvaU2zs',
+      authDomain: 'aes-26.firebaseapp.com',
+      projectId: 'aes-26',
+      storageBucket: 'aes-26.firebasestorage.app',
+      messagingSenderId: '304768334581',
+      appId: '1:304768334581:web:6a72d5c389d585f891e3bc'
+    };
+    firebase.initializeApp(firebaseConfig);
+    const homeworkDb = firebase.firestore();
     const schedule = {
       even: [
         { day: 'Понедельник', date: '1 день', lessons: [
@@ -266,6 +340,63 @@
         { day: 'Пятница', date: '5 день', lessons: [['08:30 — 10:00', 'У Иностранный язык', 'ст. пр. Близнюк О. А.', '406'], ['10:15 — 11:45', 'У Основы российской государственности', 'ст. пр. Чиков С. С.', 'Б 105'], ['12:00 — 13:30', 'Элективные курсы по физической культуре и спорту', '', ''], ['14:00 — 15:30', 'Нет пары', '', '']]}
       ]
     };
+    const homeworkSubjects = [...new Set(Object.values(schedule).flat().flatMap(day => day.lessons
+      .map(([, subject]) => subject.replace(/^(ЛК|ЛБ|У)\s+/, ''))
+      .filter(subject => subject && subject !== 'Нет пары')))]
+      .sort((first, second) => first.localeCompare(second, 'ru'));
+    document.querySelector('#homework-subject').innerHTML = homeworkSubjects
+      .map(subject => `<option value="${subject}">${subject}</option>`).join('');
+    const homeworkList = document.querySelector('#homework-list');
+    const homeworkStatus = document.querySelector('#homework-status');
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+    }[character]));
+    function homeworkState(dateString) {
+      const dueDate = new Date(`${dateString}T00:00:00`);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const daysLeft = Math.ceil((dueDate - today) / 86400000);
+      if (daysLeft < 0) return { className: 'gray', label: 'Срок уже прошёл' };
+      if (daysLeft <= 1) return { className: 'red', label: daysLeft === 0 ? 'Сдать сегодня' : 'Сдать завтра' };
+      if (daysLeft <= 7) return { className: 'yellow', label: `Осталось ${daysLeft} дн.` };
+      return { className: 'green', label: `Осталось ${daysLeft} дн.` };
+    }
+    function renderHomework(snapshot) {
+      const homework = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      homeworkList.innerHTML = homework.length ? homework.map(item => {
+        const state = homeworkState(item.dueDate);
+        return `<article class="homework-card ${state.className}">
+          <span class="traffic-light" aria-label="${state.label}"></span>
+          <div><h3>${escapeHtml(item.subject)}</h3><p>${escapeHtml(item.title)}</p>
+          <time datetime="${escapeHtml(item.dueDate)}">${new Date(`${item.dueDate}T00:00:00`).toLocaleDateString('ru-RU')} · ${state.label}</time></div>
+        </article>`;
+      }).join('') : '<div class="subtle">Пока заданий нет. Добавьте первое.</div>';
+    }
+    homeworkDb.collection('homework').orderBy('dueDate').onSnapshot(renderHomework, error => {
+      homeworkStatus.textContent = 'Не удалось загрузить общую доску. Проверьте настройки Firestore.';
+      console.error('Не удалось загрузить домашние задания:', error);
+    });
+    document.querySelector('#homework-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const subject = document.querySelector('#homework-subject').value;
+      const titleInput = document.querySelector('#homework-title');
+      const dateInput = document.querySelector('#homework-date');
+      homeworkStatus.textContent = 'Добавление задания…';
+      try {
+        await homeworkDb.collection('homework').add({
+          subject,
+          title: titleInput.value.trim(),
+          dueDate: dateInput.value,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        titleInput.value = '';
+        dateInput.value = '';
+        homeworkStatus.textContent = 'Задание добавлено на общую доску.';
+      } catch (error) {
+        homeworkStatus.textContent = 'Не удалось добавить задание. Проверьте правила Firestore.';
+        console.error('Не удалось добавить домашнее задание:', error);
+      }
+    });
     const grid = document.querySelector('#schedule-grid');
     function renderWeek(week) {
       grid.innerHTML = schedule[week].map(({ day, date, lessons }) => `
@@ -321,7 +452,7 @@
       imageModal.classList.remove('open');
       modalImage.removeAttribute('src');
     }
-    document.querySelectorAll('.photo-collage img').forEach(image => image.addEventListener('click', () => {
+    document.querySelectorAll('.photo-carousel img').forEach(image => image.addEventListener('click', () => {
       modalImage.src = image.src;
       modalImage.alt = image.alt;
       imageModal.classList.add('open');
@@ -337,6 +468,32 @@
       if (video.requestFullscreen) await video.requestFullscreen();
       else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
     }));
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+      const track = carousel.querySelector('.media-track');
+      const slides = [...carousel.querySelectorAll('.media-tile')];
+      const dots = carousel.querySelector('.carousel-dots');
+      let current = 0;
+      dots.innerHTML = slides.map((_, index) => `<button class="carousel-dot${index === 0 ? ' active' : ''}" type="button" aria-label="Открыть элемент ${index + 1}"></button>`).join('');
+      const dotButtons = [...dots.children];
+      function showSlide(index) {
+        current = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotButtons.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === current));
+        slides.forEach((slide, slideIndex) => {
+          const video = slide.querySelector('video');
+          if (video && slideIndex !== current) video.pause();
+        });
+      }
+      carousel.querySelector('.previous').addEventListener('click', () => showSlide(current - 1));
+      carousel.querySelector('.next').addEventListener('click', () => showSlide(current + 1));
+      dotButtons.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
+      let touchStartX = 0;
+      carousel.addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].screenX; }, { passive: true });
+      carousel.addEventListener('touchend', event => {
+        const distance = event.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(distance) > 45) showSlide(current + (distance < 0 ? 1 : -1));
+      }, { passive: true });
+    });
   </script>
 </body>
 </html>
