@@ -1,0 +1,544 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>АЭС-26 — методички</title>
+  <meta name="description" content="Методические материалы для группы АЭС-26">
+  <style>
+    :root {
+      --ink: #2e2925;
+      --muted: #786e64;
+      --paper: #f8f1e7;
+      --card: #fffaf3;
+      --line: #ddcdbc;
+      --accent: #a45f43;
+      --accent-dark: #76422f;
+      --soft: #efe1d1;
+      --green: #6f8066;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(circle at 8% 5%, rgba(208, 170, 134, .23), transparent 30rem), var(--paper);
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, iframe, video { max-width: 100%; }
+    .shell { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
+    header {
+      border-bottom: 1px solid rgba(164, 95, 67, .16);
+      background: rgba(248, 241, 231, .88);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; }
+    .brand { display: flex; align-items: center; gap: 13px; font-weight: 800; letter-spacing: .12em; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      color: var(--paper); background: var(--accent); border-radius: 13px;
+      font-size: 15px; letter-spacing: 0;
+    }
+    .brand small { display: block; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .16em; margin-top: 3px; }
+    .top-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(164, 95, 67, .25);
+      border-radius: 999px; background: var(--card);
+      padding: 9px 14px; font-size: 12px; line-height: 1.4;
+      box-shadow: 0 10px 22px rgba(46, 41, 37, .05);
+    }
+    main { padding: 44px 0 80px; }
+    .page-head { margin-bottom: 26px; }
+    .eyebrow { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .19em; font-size: 11px; }
+    h1 {
+      margin: 14px 0 12px;
+      font-family: Georgia, serif;
+      font-size: clamp(42px, 5vw, 74px);
+      line-height: .95;
+      font-weight: 500;
+      letter-spacing: -.055em;
+    }
+    .lead { max-width: 700px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: 0 12px 28px rgba(46,41,37,.04);
+    }
+    .card .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--accent-dark);
+      background: var(--soft);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .card h2 {
+      margin: 16px 0 10px;
+      font-family: Georgia, serif;
+      font-size: 30px;
+      line-height: 1.1;
+      font-weight: 500;
+    }
+    .card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 0; border-radius: 10px; padding: 11px 16px;
+      background: var(--ink); color: var(--paper);
+      font-weight: 700; cursor: pointer;
+    }
+    .button:hover { background: var(--accent); }
+    .subject-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 12px;
+    }
+    .subject-tab {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--muted);
+      padding: 9px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .subject-tab.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+      box-shadow: 0 12px 24px rgba(46,41,37,.08);
+    }
+    .subject-panels {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      overflow: hidden;
+    }
+    .subject-panel {
+      display: none;
+      padding: 24px;
+    }
+    .subject-panel.active {
+      display: block;
+    }
+    .subject-panel h3 {
+      margin: 0 0 10px;
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: 500;
+    }
+    .subject-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .resource-card {
+      display: block;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.45);
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 10px 18px rgba(46,41,37,.03);
+    }
+    .resource-card img {
+      display: block;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--line);
+      background: #f2e3d5;
+    }
+    .resource-card .body {
+      padding: 12px 14px 14px;
+    }
+    .resource-card h4 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .resource-card small {
+      display: inline-block;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(164, 95, 67, .25);
+      background: var(--card);
+      padding: 9px 14px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .viewer-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(18, 15, 14, 0.6);
+      z-index: 50;
+      padding: 24px;
+    }
+    .viewer-modal.open {
+      display: flex;
+    }
+    .viewer-panel {
+      width: min(1100px, 92vw);
+      max-height: 90vh;
+      background: #fffdf9;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 28px 60px rgba(0,0,0,.22);
+    }
+    .viewer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(248, 241, 231, .9);
+    }
+    .viewer-head h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .viewer-close {
+      border: 1px solid rgba(164, 95, 67, .25);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .viewer-body {
+      padding: 12px;
+      background: #f7f1ea;
+      height: min(76vh, 760px);
+    }
+    .viewer-body iframe,
+    .viewer-body img {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: white;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .viewer-body img {
+      object-fit: contain;
+      padding: 2px;
+    }
+    footer {
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 980px) {
+      .header-row { flex-direction: column; align-items: flex-start; }
+      .header-row > div { width: 100%; }
+      .grid { grid-template-columns: 1fr; }
+      .subject-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+      .subject-tab { white-space: nowrap; }
+    }
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 20px, 1120px); }
+      .header-row { padding: 14px 0; }
+      .brand { letter-spacing: .08em; }
+      .top-link { width: 100%; justify-content: center; }
+      .header-row > div { display: flex; flex-direction: column; gap: 10px; }
+      .page-head { margin-bottom: 18px; }
+      h1 { font-size: clamp(36px, 12vw, 52px); }
+      .lead { font-size: 15px; }
+      .subject-panel { padding: 18px; }
+      .subject-panel h3 { font-size: 26px; }
+      .resource-grid { grid-template-columns: 1fr; }
+      .resource-card img { height: 210px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell header-row">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">А26</span>
+        <span>АЭС-26<small>ГРУППА МЭИ</small></span>
+      </a>
+      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <a class="top-link" href="index.html">Вернуться к расписанию</a>
+        <a class="top-link" href="https://t.me/addstickers/nuclearpowerplant26" target="_blank" rel="noreferrer noopener">Добавить наш стикер пак в TG</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="page-head">
+      <div class="eyebrow">Материалы</div>
+      <h1>Методички<br>для АЭС-26.</h1>
+      <p class="lead">Сборник полезных материалов, ссылок и памяток без лишних разделов — только то, что действительно нужно для учёбы.</p>
+    </div>
+
+    <div class="subject-tabs" aria-label="Предметы">
+      <button class="subject-tab active" type="button" data-subject="all">Все</button>
+      <button class="subject-tab" type="button" data-subject="math">Математика</button>
+      <button class="subject-tab" type="button" data-subject="fiz">Физика</button>
+      <button class="subject-tab" type="button" data-subject="graf">Графика</button>
+      <button class="subject-tab" type="button" data-subject="proekt">Проектная работа</button>
+      <button class="subject-tab" type="button" data-subject="english">Английский</button>
+    </div>
+
+    <div class="subject-panels">
+      <div class="subject-panel active" data-panel="all">
+        <h3>Все материалы</h3>
+        <p>Ниже собраны доступные методические материалы по предметам, которые уже есть в папках группы. Картинки можно смотреть прямо в браузере, а файлы — открывать или скачивать.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="math/Практикум по математике  2024.doc" target="_blank" rel="noreferrer noopener">
+            <div class="body">
+              <small>Математика</small>
+              <h4>Практикум по математике 2024</h4>
+            </div>
+          </a>
+          <a class="resource-card" href="fiz/OVS59gj9mH9tVB1Y84XzvBj6N2zhZSbEkr7ANClGNmqQAfUBKjrmhpbA_SLWHXoiOHflr0uJvY9l9t3u.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="fiz/OVS59gj9mH9tVB1Y84XzvBj6N2zhZSbEkr7ANClGNmqQAfUBKjrmhpbA_SLWHXoiOHflr0uJvY9l9t3u.jpg" alt="Физика 1">
+            <div class="body">
+              <small>Физика</small>
+              <h4>Материалы по физике</h4>
+            </div>
+          </a>
+          <a class="resource-card" href="graf/BtVnw2r8Ni7WGB7oKH1YDsrc1tTFB67lwCWeDHhWVGHV9FH09Ni8dx1uXLi6Wx51r9Oh-nkMXFCw3TGb.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="graf/BtVnw2r8Ni7WGB7oKH1YDsrc1tTFB67lwCWeDHhWVGHV9FH09Ni8dx1uXLi6Wx51r9Oh-nkMXFCw3TGb.jpg" alt="Графика 1">
+            <div class="body">
+              <small>Графика</small>
+              <h4>Примеры по графике</h4>
+            </div>
+          </a>
+          <a class="resource-card" href="proekt/FKiS_-_metodicheskoe_posobie_po_napisaniyu_referata_1.pdf" target="_blank" rel="noreferrer noopener">
+            <img src="proekt/5QcC_Zy-Es2zi0GTEghbx7evS3mqZIJw35Fx2yvFp6yBm3xM7VSaw4B1m7p_W35XdwBd5XWOqBHS2beU.jpg" alt="Проектная работа">
+            <div class="body">
+              <small>Проектная работа</small>
+              <h4>Методическое пособие по реферату</h4>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subject-panel" data-panel="math">
+        <h3>Математика</h3>
+        <p>В папке есть практикум по математике для учебной работы. Его можно открыть и посмотреть прямо в браузере или скачать на устройство.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="math/Практикум по математике  2024.doc" target="_blank" rel="noreferrer noopener">
+            <div class="body">
+              <small>Документ</small>
+              <h4>Практикум по математике 2024</h4>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subject-panel" data-panel="fiz">
+        <h3>Физика</h3>
+        <p>Физические материалы добавлены как изображения, чтобы можно было быстро посмотреть их прямо на сайте.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="fiz/OVS59gj9mH9tVB1Y84XzvBj6N2zhZSbEkr7ANClGNmqQAfUBKjrmhpbA_SLWHXoiOHflr0uJvY9l9t3u.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="fiz/OVS59gj9mH9tVB1Y84XzvBj6N2zhZSbEkr7ANClGNmqQAfUBKjrmhpbA_SLWHXoiOHflr0uJvY9l9t3u.jpg" alt="Физика фото 1">
+            <div class="body"><small>Фото</small><h4>Материал 1</h4></div>
+          </a>
+          <a class="resource-card" href="fiz/o3HbuDeTvV4PcC3IZhhJsWnq33btSkWQt2BnHWlDVBRw7jT7-CP9S603dyrM11JAqKtJ_QCSFKcPSrag.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="fiz/o3HbuDeTvV4PcC3IZhhJsWnq33btSkWQt2BnHWlDVBRw7jT7-CP9S603dyrM11JAqKtJ_QCSFKcPSrag.jpg" alt="Физика фото 2">
+            <div class="body"><small>Фото</small><h4>Материал 2</h4></div>
+          </a>
+          <a class="resource-card" href="fiz/LoPohAIYL53RpLHTkWb7idt6Nd7vI_zUaqL4unFsdWi8utKWxKqoSmQ4rvcSdn46hwN4oUFrj_p6d6jW.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="fiz/LoPohAIYL53RpLHTkWb7idt6Nd7vI_zUaqL4unFsdWi8utKWxKqoSmQ4rvcSdn46hwN4oUFrj_p6d6jW.jpg" alt="Физика фото 3">
+            <div class="body"><small>Фото</small><h4>Материал 3</h4></div>
+          </a>
+          <a class="resource-card" href="fiz/lmownjKD_bpbCs76Q_Ov7sWvm6Cog7GMEkpRfxrRqskO9eRN4m0fbKAk1-l7gJgA-OUejvcg1gsAEzX3.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="fiz/lmownjKD_bpbCs76Q_Ov7sWvm6Cog7GMEkpRfxrRqskO9eRN4m0fbKAk1-l7gJgA-OUejvcg1gsAEzX3.jpg" alt="Физика фото 4">
+            <div class="body"><small>Фото</small><h4>Материал 4</h4></div>
+          </a>
+          <a class="resource-card" href="fiz/dM0b5NQ1KCXsoMKlW-ppVhCTvBncm2a6birJkq6LE28Av88mEY0vWMMbq0dHnBIOhsjqjAB_k1si3BoQ.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="fiz/dM0b5NQ1KCXsoMKlW-ppVhCTvBncm2a6birJkq6LE28Av88mEY0vWMMbq0dHnBIOhsjqjAB_k1si3BoQ.jpg" alt="Физика фото 5">
+            <div class="body"><small>Фото</small><h4>Материал 5</h4></div>
+          </a>
+          <a class="resource-card" href="fiz/arA_byWrQTT6TfHQYIzi5_MCHd04MDK6lxP0-FcadrpRhKqwijCgAvyKHonJ8qGmmUHMuLiA4jTix5AW.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="fiz/arA_byWrQTT6TfHQYIzi5_MCHd04MDK6lxP0-FcadrpRhKqwijCgAvyKHonJ8qGmmUHMuLiA4jTix5AW.jpg" alt="Физика фото 6">
+            <div class="body"><small>Фото</small><h4>Материал 6</h4></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subject-panel" data-panel="graf">
+        <h3>Графика</h3>
+        <p>В папке есть изображения с примерами и заданиями по графике. Их можно открыть в отдельном окне и листать.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="graf/BtVnw2r8Ni7WGB7oKH1YDsrc1tTFB67lwCWeDHhWVGHV9FH09Ni8dx1uXLi6Wx51r9Oh-nkMXFCw3TGb.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="graf/BtVnw2r8Ni7WGB7oKH1YDsrc1tTFB67lwCWeDHhWVGHV9FH09Ni8dx1uXLi6Wx51r9Oh-nkMXFCw3TGb.jpg" alt="Графика фото 1">
+            <div class="body"><small>Фото</small><h4>Пример 1</h4></div>
+          </a>
+          <a class="resource-card" href="graf/1fSrFuD9bieGpF8rPnMMc_GSd3vLqM_kPJSe50kM9VA4ehF-T5kO8PWEyx98qKoFumc8acoPFOVoudZS.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="graf/1fSrFuD9bieGpF8rPnMMc_GSd3vLqM_kPJSe50kM9VA4ehF-T5kO8PWEyx98qKoFumc8acoPFOVoudZS.jpg" alt="Графика фото 2">
+            <div class="body"><small>Фото</small><h4>Пример 2</h4></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subject-panel" data-panel="proekt">
+        <h3>Проектная работа</h3>
+        <p>Есть методическое пособие по написанию реферата и одно изображение с материалом по проектной работе.</p>
+        <div class="resource-grid">
+          <a class="resource-card" href="proekt/FKiS_-_metodicheskoe_posobie_po_napisaniyu_referata_1.pdf" target="_blank" rel="noreferrer noopener">
+            <img src="proekt/5QcC_Zy-Es2zi0GTEghbx7evS3mqZIJw35Fx2yvFp6yBm3xM7VSaw4B1m7p_W35XdwBd5XWOqBHS2beU.jpg" alt="Проектная работа">
+            <div class="body"><small>PDF</small><h4>Методическое пособие по написанию реферата</h4></div>
+          </a>
+          <a class="resource-card" href="proekt/5QcC_Zy-Es2zi0GTEghbx7evS3mqZIJw35Fx2yvFp6yBm3xM7VSaw4B1m7p_W35XdwBd5XWOqBHS2beU.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="proekt/5QcC_Zy-Es2zi0GTEghbx7evS3mqZIJw35Fx2yvFp6yBm3xM7VSaw4B1m7p_W35XdwBd5XWOqBHS2beU.jpg" alt="Проектная работа фото">
+            <div class="body"><small>Фото</small><h4>Дополнительный материал</h4></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subject-panel" data-panel="english">
+        <h3>Английский</h3>
+        <p>Здесь собраны материалы по английскому: темы, упражнения и курс для чтения прямо на сайте.</p>
+        <p style="margin-top: 18px;"><a class="button" href="en/english-course-book.html" target="_blank" rel="noreferrer noopener">Читать методичку на сайте</a></p>
+      </div>
+    </div>
+
+    <footer>АЭС-26 · методические материалы</footer>
+  </main>
+
+  <div class="viewer-modal" id="viewerModal" aria-hidden="true">
+    <div class="viewer-panel" role="dialog" aria-modal="true" aria-label="Просмотр материала">
+      <div class="viewer-head">
+        <h3 id="viewerTitle">Просмотр</h3>
+        <button class="viewer-close" type="button" id="closeViewer">Закрыть</button>
+      </div>
+      <div class="viewer-body" id="viewerBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const subjectTabs = document.querySelectorAll('.subject-tab');
+    const subjectPanels = document.querySelectorAll('.subject-panel');
+    const viewerModal = document.getElementById('viewerModal');
+    const viewerBody = document.getElementById('viewerBody');
+    const viewerTitle = document.getElementById('viewerTitle');
+
+    subjectTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.subject;
+
+        subjectTabs.forEach(item => item.classList.toggle('active', item === tab));
+        subjectPanels.forEach(panel => {
+          panel.classList.toggle('active', panel.dataset.panel === target);
+        });
+      });
+    });
+
+    function openViewer(url, label, kind) {
+      viewerTitle.textContent = label;
+      viewerBody.innerHTML = '';
+
+      if (kind === 'image') {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = label;
+        viewerBody.appendChild(img);
+      } else if (kind === 'pdf') {
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.title = label;
+        viewerBody.appendChild(iframe);
+      } else {
+        window.open(url, '_blank', 'noopener,noreferrer');
+        return;
+      }
+
+      viewerModal.classList.add('open');
+      viewerModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeViewer() {
+      viewerModal.classList.remove('open');
+      viewerModal.setAttribute('aria-hidden', 'true');
+      viewerBody.innerHTML = '';
+    }
+
+    document.getElementById('closeViewer').addEventListener('click', closeViewer);
+    viewerModal.addEventListener('click', (event) => {
+      if (event.target === viewerModal) closeViewer();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && viewerModal.classList.contains('open')) {
+        closeViewer();
+      }
+    });
+
+    document.querySelectorAll('.resource-card').forEach(card => {
+      card.addEventListener('click', event => {
+        const url = card.getAttribute('href');
+        if (!url) return;
+        const lower = url.toLowerCase();
+        const isImage = /\.(png|jpg|jpeg|gif|webp|bmp|svg)$/.test(lower);
+        const isPdf = lower.endsWith('.pdf');
+        if (isImage || isPdf) {
+          event.preventDefault();
+          const label = card.querySelector('h4')?.textContent || 'Материал';
+          openViewer(url, label, isPdf ? 'pdf' : 'image');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

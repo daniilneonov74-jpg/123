@@ -1,0 +1,1094 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Английский — методичка</title>
+  <style>
+    :root {
+      --ink: #2e2925;
+      --muted: #786e64;
+      --paper: #f8f1e7;
+      --card: #fffaf3;
+      --line: #ddcdbc;
+      --accent: #a45f43;
+      --accent-dark: #76422f;
+      --soft: #efe1d1;
+      --shadow: 0 18px 40px rgba(46, 41, 37, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(circle at 10% 5%, rgba(208, 170, 134, .28), transparent 26rem), linear-gradient(180deg, #f8f1e7 0%, #f4e9df 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    img, iframe, video { max-width: 100%; }
+    .shell { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(248, 241, 231, 0.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(164, 95, 67, .18);
+    }
+    .header-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 16px 0; }
+    .brand { display: flex; align-items: center; gap: 13px; font-weight: 800; letter-spacing: .12em; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center;
+      background: var(--accent); color: white; box-shadow: 0 10px 22px rgba(164, 95, 67, .22);
+      font-size: 15px; letter-spacing: 0;
+    }
+    .brand small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .14em; margin-top: 3px; }
+    .top-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(164, 95, 67, .25); border-radius: 999px; background: var(--card);
+      padding: 9px 14px; font-size: 12px; line-height: 1.4; box-shadow: 0 10px 22px rgba(46, 41, 37, .05);
+    }
+    main { padding: 36px 0 72px; }
+    .page-grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; align-items: start; }
+    .toc {
+      position: sticky; top: 94px; background: rgba(255,250,243,0.8); border: 1px solid var(--line);
+      border-radius: 18px; padding: 18px 14px; box-shadow: var(--shadow);
+    }
+    .toc-title { margin: 0 0 14px; font-size: 12px; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .toc-list { display: grid; gap: 8px; }
+    .toc a { display: block; padding: 9px 10px; border-radius: 10px; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .toc a:hover, .toc a.active { background: var(--soft); color: var(--ink); }
+    .article { background: rgba(255,250,243,0.92); border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow); padding: 28px 28px 30px; }
+    .article-head { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 24px; }
+    .eyebrow { color: var(--accent); font-weight: 900; text-transform: uppercase; letter-spacing: .18em; font-size: 11px; margin-bottom: 12px; }
+    h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(42px, 6vw, 74px); letter-spacing: -.055em; line-height: .93; font-weight: 500; }
+    .subtitle { margin-top: 12px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .lesson {
+      margin-top: 22px; border: 1px solid var(--line); border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.2));
+      padding: 18px 18px 16px;
+    }
+    .lesson h2 {
+      margin: 0 0 10px; font-family: Georgia, serif; font-size: clamp(24px, 4vw, 36px);
+      letter-spacing: -.04em; line-height: 1.08; font-weight: 500;
+    }
+    .lesson-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .pill { display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 999px; background: var(--soft); color: var(--accent-dark); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .exercise-box {
+      margin-top: 14px; padding: 16px 16px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.32);
+    }
+    .exercise-box h3, .lesson h3 {
+      margin: 0 0 10px; font-size: 17px; font-weight: 800; color: var(--ink);
+    }
+    .exercise-box p, .exercise-box li, .lesson p, .lesson li {
+      color: #3d332e; font-size: 15px; line-height: 1.7; margin: 0;
+    }
+    .exercise-box ul, .exercise-box ol, .lesson ul, .lesson ol {
+      margin: 12px 0 0 20px; padding-left: 8px;
+    }
+    .exercise-box li + li { margin-top: 8px; }
+    .two-col-table {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      margin-top: 12px;
+      border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+      background: rgba(255,255,255,.25);
+    }
+    .two-col-table .cell {
+      padding: 10px 12px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+    }
+    .two-col-table .cell:nth-child(2n) { border-right: 0; }
+    .two-col-table .cell:nth-last-child(-n + 2) { border-bottom: 0; }
+    .cell-label {
+      display: block; margin-bottom: 4px; color: var(--accent-dark); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    }
+    @media (max-width: 980px) {
+      .page-grid { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .toc-list { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 18px, 1200px); }
+      .header-row { align-items: flex-start; flex-direction: column; }
+      .brand { letter-spacing: .08em; }
+      .top-link { width: 100%; }
+      .article { padding: 18px 14px; }
+      .lesson { padding: 16px 14px; }
+      .lesson h2 { font-size: 28px; }
+      .exercise-box { padding: 12px 10px; }
+      .two-col-table { grid-template-columns: 1fr; }
+      .two-col-table .cell { border-right: 0; }
+      .two-col-table .cell:nth-last-child(-n + 1) { border-bottom: 0; }
+      .exercise-box p, .exercise-box li, .lesson p, .lesson li { font-size: 14px; }
+      .toc-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell header-row">
+      <a class="brand" href="../methodics.html">
+        <span class="brand-mark">А26</span>
+        <span>АЭС-26<small>ГРУППА МЭИ</small></span>
+      </a>
+      <a class="top-link" href="../methodics.html">Вернуться к методичкам</a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="page-grid">
+      <aside class="toc" aria-label="Навигация по урокам">
+        <div class="toc-title">Уроки</div>
+        <nav class="toc-list" id="toc"></nav>
+      </aside>
+      <article class="article" id="reader"></article>
+    </div>
+  </main>
+
+  <script>
+    const source = `О.А. Близнюк
+English Course Book
+Part I
+SMOLENSK 2026
+LESSON 1 (2 hours)
+Topics: Self Introduction; Choosing a University
+Grammar: Simple Tenses
+Vocabulary Section 1
+Match the phrases to their definitions; give Russian equivalents.
+Word/Phrase
+Definition
+1. get a good score
+2. science
+3. study
+4. be admitted
+5. school leaving certificate
+6. be interested in
+7. enter the university
+8. unified state exam
+9. apply to a university
+10. choose a university
+11. graduate from
+a. to decide which university you want to go to
+b. want to learn about or do something because it is exciting
+c. to be allowed to start studying at a  university
+d. to have a high number in a test or exam
+e. a test all students take to finish school and go to university
+f. a paper that shows you have finished school
+g. to ask a university to let you study there
+h. the systematic study of the nature and
+behaviour of the material and physical universe, based on observation, experiment, and measurement, and the formulation of laws to describe these facts in general terms
+to start studying at a university
+j. to spend time learning about something at school or university
+k. complete your studies at a university and receive a diploma or degree
+2. Fill in the gaps with the words and phrases. Translate them into Russian.
+apply to, school leaving certificate, choose, have been admitted, sciences, unified state exam, study, get a good score, graduate from, enter the university
+1. Many students are interested in subjects that will help them pass the _______________(1).
+2. Chemistry, Physics and Biology are natural _______________(2).
+3. The unified state exam is very important for students who want to _______________(3) in our country.
+4. You should _______________(4)a university before the deadline.
+5. It is important to _______________(5)a university that offers courses related to your future career.
+6. The _______________(6) shows that you have completed your secondary education.
+7. Only a few students _______________(7) to the most popular universities this year.
+8. To _______________(8), you need to ractice regularly and understand the exam format.
+9. I _______________(9) a lot of new subjects at the technical university.
+10. After four years of hard work Maria will ________(10) from the university with a degree in engineering.
+3. Make sentences from the words.
+List of words:
+0. studies/technical/university
+E.g.          She studies at a technical university.
+The students at the technical university work hard to achieve their goals.
+1. get a good score/study/exams
+2. science/like/because
+3. study/be admitted/university
+4. school leaving certificate/enter the university/important
+5. interested in/higher education/unified state exam
+6. apply to a university/better opportunities/higher education
+4. Read the story and say what subject surprises the student most.
+Hi! My name is Michal Smirnov. I’m from Russia.  I’m 18. After finishing high school I was interested in studying engineering. So, I decided to apply to a technical university. I had to take the Unified State Exam and get a good score to enter the university. I also needed my school leaving certificate to prove that I finished high school.
+I chose a university that had a good reputation for its engineering program. I applied online and sent all the necessary documents. After a few weeks I received an email saying that I was admitted to the Smolensk Branch of the Moscow Power Engineering Institute!
+I am so excited to start my studies at the university. I am studying computer engineering in my first year. The course is challenging but interesting. Right now I am learning about programming and electronics. Every week brings new topics and new problems to solve.
+Do you know what subject surprises me most? It is mathematics. I thought I already knew enough — but university maths is on a completely different level!
+Studying at the university is not easy, but I know that with hard work and persistence, I can achieve my goals and succeed in my studies.
+Knowledge and skills obtained at the university will help me in my future career.
+5. Look through the story in exercise 4 and answer the questions.
+1. Why did the student need to take the Unified State Exam?
+2. How did the student apply to the university?
+3. What is the student studying in the first year?
+4. Why was the student surprised by mathematics at university?
+5. How does the student plan to succeed in the studies?
+6. What university did the student enter?
+7. What will help the student in the future career?
+8. How can the student achieve the goals?
+6. Read four opinions about choosing a university. What does the phrase “it is worth thinking about both sides carefully” mean?
+a) it’s a good idea to think carefully before choosing something;
+b) you should spend the same amount of time thinking about each side;
+c) both sides are valuable and deserve careful attention.
+Priya: “I really think that choosing the right university is one of the most important decisions you can make. For me, the most important thing was finding a course that matched what I actually wanted to do. When I visited an open day at my local university, I spoke to current students and they told me so much about what life there was really like. That visit helped me feel confident about my choice, so I always say: do your research and visit as many universities as you can before you decide.”
+Marcus: “Honestly, I think people put too much pressure on choosing the ‘perfect’ university, and I find it a bit unhelpful. I entered a university that was not very well known, but my lecturers were brilliant and I got a great job afterwards. The name of the university matters much less than what you actually do while you are there. So I would say, stop worrying so much about rankings and focus on whether the course and the environment feel right for you.”
+Joana: “I can see why people say the university you choose is very important, and I partially agree, but I also think it depends on the person. My brother chose a top university far from home and he struggled a lot because he felt lonely and lost. But a friend of mine went to a smaller local university and loved every minute of it. I think location and support matter just as much as the reputation of the university, so it is worth thinking about both sides carefully.”
+Tom: “Choosing my university was honestly one of the hardest things I have ever done, and I made the wrong choice the first time. I picked a course based on what my parents wanted, not what I was interested in, and after one year I had to change universities completely. It was stressful and cost me a lot of time. Now I always tell younger people to be honest with themselves about what they enjoy, because going to the ‘best’ university means nothing if you are not happy there.”
+–Which opinion do you agree with? Why? What is worth thinking about before entering the university in your opinion?
+7. Discuss the questions.
+1. What exams did you pass to enter the technical university?
+4. Why did you decide to enter a technical university?
+5. Why have you chosen the Smolensk Branch of the Moscow Power Engineering Institute (National Research University)?
+6. What course of study (major) have you chosen? What are you studying in the first year? What subject/subjects is/are challenging for you?
+7. What advice would you give someone who wants to enter a technical university?
+8. Introduce yourself and speak about:
+what you did to enter this university;
+what major you have chosen and why;
+what subjects are worth studying;
+what is challenging for you;
+what you need higher education for.
+CRAMMAR SECTION 1
+SIMPLE (INDEFINITE)TENSES
+Present Simple
+- регулярно повторяющееся действие, общеизвестный факт
+Сигнальные слова: every day/ week/ month/ year, usually, always, often, seldom, really
+Образование: V; Vs (3л. Ед. ч.)
++ I work. He works.
+? Do I work? Does he work?
+- I don’t work. He doesn’t work.
+Past  Simple
+- Однократное действие в прошлом
+Сигнальные слова: yesterday, last week/ month/ year, … ago
+Образование: Ved (правильные глаголы), V2 (неправильные глаголы)
++ I worked. He came.
+? Did I work? Did he come?
+- I didn’t work. He didn’t come.
+Future Simple
+- Однократное действие в будущем
+Сигнальные слова: tomorrow, next week/ month/ year, in two days
+Образование: will + V
++ I will work.
+? Will I work?
+- I will not (won’t) work.
+Match the verb forms of the sentences to the tenses; name the signal words (сигнальные слова).
+Many students enter the university every year.
+Last year Maria entered the university and chose a major in biology.
+Next September Tom will enter the university if he gets a good score in Physics.
+Last term, John passed all his exams and received excellent grades from his teachers.
+Students usually attend lessons five days a week and do their homework in the evening.
+Present Simple Tense
+Future Simple Tense
+Past Simple Tense
+Put the verbs in brackets into the Present Simple.
+1. My working day (to begin) at seven o’clock. I  (to get) up, (to turn) on TV and (to do) my morning exercises. It (to take) me fifteen minutes. At half past seven we (to have) breakfast. My father and I (to leave) home at eight o’clock. He (to take) a bus to his office. My mother (to be) a doctor, she (to leave) home at nine o’clock. In the evening we (to gather) in the living room. We (to watch) TV and (to talk). 2. My sister (to get) up at eight o’clock. 3. She (to be) a schoolgirl. 4. Jane (to be) fond of sports. She (to do) her morning exercises every day. 5. For breakfast she (to have) two eggs, a sandwich and a cup of tea. 6. After breakfast she (to go) to school. 7. It (to take) her two hours to do her homework. 8. She (to speak) French well.
+3. Put the verbs in brackets into the Past Simple.
+1. Yesterday he (to wash) his face at half past seven.  2. I (to work) at school 3 years ago. 3. We (to study) at university in 2009. 4. My mother (not to like) milk in her childhood. 5. Our children (to play) football last year. 6. You (to like) your school?  7. You (to work) at the hospital last week? 8. We (not to rest) yesterday. 9. My friend (to live) in America 2 years ago. 10. You (to live) in this house last year? 11. Where you (to study)? 12. Your mother (to cook) supper yesterday? 13. I (not to cook) breakfast yesterday. 14. You (to do) your homework yesterday? 15. I (to help) my Granny in the garden last weekend.
+4. Put the verbs in brackets into the Present Simple or Past Simple.
+1. I (to watch) TV at seven o’clock every evening. 2. I (to watch) TV yesterday. 3. She (to do) her morning exercises very often. 4. She (to do) her morning exercises yesterday. 5. I usually (to walk) to university but yesterday I (to take) a taxi. 6. As a rule my mother (to cook) dinner but yesterday she (to invite) us to the restaurant. 7. He (not to like) coffee but yesterday he (to drink) a cup of coffee as he (to be) very tired. 8. They (to be) in Moscow now but last week they (to be) in New York. 9. He usually (to sleep) well but last night he (to sleep) badly. 10. She (to play) tennis every weekend but last weekend she (not to play) tennis, she (to work) in the garden.
+5. Put the verbs in brackets into the Future Simple.
+1. Mary (to buy) a new car tomorrow. 2. It’s too late to phone him now. I (to phone) him in the morning. 3. You (to speak) English much better in a year. 4. Andrew (to write) her a letter tomorrow. 5. I (to pay) the bill in three days. 6. We (to have) a party next week. 7. Tom (not to go) for a holiday next month. 8. They (not to play) football tomorrow. 9. The performance (to begin) in two hours. 10. Jill (not to go) to the restaurant tomorrow. 11. John (to finish) school next year. 12. They (to arrange) a meeting tonight. 13. I (to help) you a bit later. 14. Next Monday students (to be) very busy. 15. We (to have) our English exam soon.
+6. Put the verbs in bracket into the Present Simple, Past Simple or Future Simple.
+1. I (to go) to bed at ten o’clock every day. 2. I (to go) to bed at ten o’clock yesterday. 3. I (to go) to bed at ten o’clock tomorrow. 4. I (not to go) to the cinema every day. 5. I (not to go) to the cinema yesterday. 6. I (not to go) to the cinema tomorrow. 7. You (to watch) TV every day? 8. You (to watch) TV yesterday? 9. You (to watch) TV tomorrow? 10. When you (to leave) home for Institute every day? 11. When you (to leave) home for Institute yesterday? 12. When you (to leave) home for Institute tomorrow?
+7. Put the verbs in bracket into the Present Simple, Past Simple or Future Simple.
+1. He (to turn) on the television to watch cartoons every morning. 2. He (to turn) on the television to watch cartoons yesterday morning. 3. He (to turn) on the television to watch cartoons tomorrow morning. 4. I always (to go) to Canada to visit my relatives there. 5. I (to be) very busy last summer and I (not to go) there. 6. I (not to go) there next year because it (to cost) a lot of money. 7. They (to enjoy) the performance yesterday evening? 8. Who (to take) care of the child in the future? 9. How often you (to go) to the dentist’s? 10. We (not to have) very good weather, but we (to have) a good time in London last year.
+8. Put the verbs in the story into the Present Simple, Past Simple or Future Simple.
+Sarah’s University Journey
+Sarah is 18 years old and she __________ (be) very excited about her future. Right now, she is preparing for university entrance exams. Last month, she __________ (apply to) three different universities because she wants to have more options.
+Two years ago, when Sarah was in her first year of high school, she __________ (enter) a science Olympiad and ______ (win) the first place. That experience changed her life. She __________ (get) a good score and __________ (study) science subjects very hard every day.
+Now Sarah needs to choose a major. She ____ (be interested) in both medicine and engineering. “I __________ (make) my final decision next week,” she says.
+Her older brother Tom __________ (graduate) from the university last year. He often ______(give) her advice. “When you enter the university next September, everything __________ (be) different,” he tells her. “You __________ (meet) new people and __________ (learn) many interesting and useful for your future career things.”
+Sarah believes that if she works hard, she  ____(succeed) in her studies and _______(achieve) her goals in the future.
+LESSON 2 (4 hours)
+Topics: the University I’ve chosen; the Importance of Higher Education
+Grammar: Questions Types
+GRAMMAR SECTION 2
+QUESTIONS TYPES
+Yes/ No Question
+( Общий вопрос)
+Alternative Question (Альтернативный вопрос)
+Wh-question  (Специальный вопрос)
+Tag question (Разделительный вопрос)
+Задается ко всему предложению в целом. Требует ответа «Да» или «Нет».
+E.g.
+Do you study English? – Yes, I do/ No, I don’t.
+Обозначает выбор из нескольких лиц, предметов, действий.
+Требует союз or.
+E.g.
+Do you study English or French? – I study English.
+Вопросы к каждому члену предложения. Начинаются с вопросительного слова:
+who – кто, what – что, какой, which – который, whose – чей, when – когда, where – где, куда, why – почему, how – как, how much/ how many – сколько, how long – как долго, how often – как часто.
+E.g.
+What  do you study? – I study English.
+.
+!!! вопрос к подлежащему и определению подлежащего строится по типу утвердительного предложения!!!
+E.g.
+Who studies English?
+Вопрос требует подтверждения «не так ли?», «не правда ли?».
+Может строиться двумя способами:
+1) +, - ? (1-ая часть – утвердительное предложение; 2-ая часть – краткий общий отрицательный вопрос)
+E.g.
+You study English, don’t you? – Yes, I do/ No, I don’t.
+2) -, +? ( 1-ая часть – отрицательное предложение; 2-ая часть – краткий общий вопрос).
+E.g.
+You don’t study English, do you? – Yes, I do/ No, I don’t.
+Ask Yes/No questions.
+He goes to university every day. 2. My sister works here. 3. They eat a lot. 4. We work very hard. 5. I come from Russia. 6. He comes from Germany. 7. They live in a hostel. 8. He plays chess every evening. 9. I visit my parents very often. 10. His father works at an office. 11. She gets up at seven o’clock. 12. They play tennis very often. 13. We go to the cinema on Saturdays. 14. He wants to become an engineer. 15. My brother surfs the net every night. 16. I listen to the latest news every morning. 17. Her father finishes his work at six o’clock.
+Ask Wh-questions; use the words in brackets.
+E.g. They study maths at the university. (what) – What do they study at the university?
+1. They earn a lot of money. (how much) 2. She is an engineer. (what) 3. She has got a car. (who) 4. Tom plays football every day. (how often) 5. Nancy came home at 7 o’clock yesterday. (what time) 6. You have got 2 children (how many). 7. His story was interesting. (whose) 8. We will meet next Friday. (when) 9. They worked hard last month. (how) 10. We were at the cinema yesterday. (where) 11. He can drive a car 24 hours without a stop. (how long) 12. They are the best parents in the world. (why).
+Ask Alternative Questions for the answers.
+E.g. I study Maths. – Do you study Maths or Physics?
+1. I prefer coffee. 2. Lily is a student. 3. Tom works at the office. 4. I go to work by bus. 5. He has got a dog. 6. We live in Moscow. 7. They work. 8. Mandy is an engineer. 9. He goes to the university. 10. She studies English.
+4. Ask Tag questions.
+E.g. He is interested in Physics. – He is interested in Physics, isn’t he?
+1. He works in a bank. 2. They didn’t see him last week. 3. They attend classes regularly. 4. She watched TV yesterday. 5. Kate doesn’t play tennis. 6. You don’t like animals. 7. He is in his office. 8. They weren’t happy. 9. We are good friends. 10. Nick was at work. 11. He isn’t an engineer. 12. They aren’t serious. 13. We can drive. 14. You haven’t a visa. 15. We will take exams soon.
+5. Read what students tell about their education. Ask them 3 questions to get more information.
+Maria
+I study medicine at the University of Barcelona. My classes start at 9 o’clock every morning. I have many difficult subjects like biology and chemistry. I want to be a doctor and help sick people.
+E.g. When do your classes finish?
+Tom
+I’m a second-year student at Manchester University. I study computer science because I love technology. The professors are very good and friendly. After university, I hope to work for a big tech company.
+Yuki
+I study art and design in Tokyo. My favorite class is painting on Tuesday and Thursday. The university has a beautiful library where I study every day. In the future, I want to open my own art studio.
+Read the information about the Smolensk Branch of the Moscow Power Engineering Institute (National Research University) and ask 3 wh-questions about it.
+The Smolensk Branch of the Moscow Power Engineering Institute (National Research University) is the main university in the Smolensk region in the field of power engineering, electrical and thermal engineering, electronics and nanoelectronics, optical techniques, computer science, technological machines and equipment, nuclear energy and thermal physics.
+To enter the institute you have to take entrance examination or you can be admitted according to the results of the unified state exam.
+VOCABULARY SECTION 2
+Match the words and phrases to their definitions; give Russian equivalents.
+Word/phrase
+Definition
+thermal physics
+obtain prestigious diplomas
+facilities for
+power engineering
+scientific laboratories
+attend lectures
+advancement in future
+8. broaden outlook
+9. thermal engineering
+10. curriculum
+11. in the field of
+12. measuring systems
+13. nuclear energy
+14. equipment
+15. development
+a. the process of growing or getting better at something.
+b. tools or ways to find the size, amount, or number of something.
+c. places or things that help you do an activity or work.
+d. special rooms where people do tests and experiments.
+e. study of heat and how it moves or changes things.
+f. moving forward or getting better in your life or job later.
+g. to learn more and see new ideas or ways of thinking.
+h. go to lessons where a teacher talks to a group.
+i. the subjects comprising a course of study in a school or college.
+j. working or studying in a special area or subject.
+k. power made from very small parts inside atoms.
+l. work with machines and systems that make and use energy.
+m. work with heat and how to use or control it.
+n. things or tools you need to do a job or activity.
+o. get important certificates that show your  successful completion of study
+Read the text; find the sentences with the words and phrases from exercise 1; translate them into Russian.
+The Smolensk Branch of the Moscow Power Engineering Institute
+(National Research University)
+The Smolensk Branch of the Moscow Power Engineering Institute (National Research University) was founded in 1961. It is the main university in the Smolensk region in the field of power engineering, electrical and thermal engineering, electronics and nanoelectronics, optical techniques, computer science, technological machines and equipment, nuclear energy and thermal physics.
+To enter the institute you have to take entrance examination or you can be admitted according to the results of the unified state exam.
+The university offers a Bachelor’s degree programme (the first and basic level of higher education) which lasts for 4 years of full-time study, and a Master’s degree programme (the second level of higher education) which lasts for 2 more years of education. The programmes include professional and special courses in Science, Humanities and Social economic disciplines, professional training, completion of a research paper/project and passing of State final exams.
+The teaching staff of National Research University consists of professors, highly qualified lecturers and assistants.
+The academic year is divided into two terms. During the studying process the students attend lectures and classes and do laboratory work. After each term (semester) students take examinations. During the first two years there is a common curriculum for most majors. Specialization usually begins in the third year of studies.
+The institute today is a unity of educational and scientific laboratories supplied with modern equipment, control and measuring systems, technical means of education. There is also a large scientific and technological library. Scientific conferences held at the university broaden students’ outlook and enrich knowledge in modern trends and recent developments.
+There are also facilities for sport, recreation and entertainment. Students have a chance to compete in athletics and football, participate in voluntary groups and different students’ clubs.
+Nobody doubts that these days the progress in the world depends on the progress in education, higher education in particular. Students of the Smolensk Branch of the Moscow Power Engineering Institute acquire good knowledge, obtain prestigious diplomas to get higher wages and advancement in future.
+Fill in the gaps with the words and phrases:
+in the field of, Bachelor’s degree, facilities, lectures, obtain, advancement, equipment, nuclear energy, laboratories, research, thermal engineering, broaden
+The Smolensk Branch of the Moscow Power Engineering Institute was founded in 1961. It is the main university in the Smolensk region _______________(1) power engineering, electrical and _______________(2), electronics and nanoelectronics, optical techniques, computer science, technological machines and _______________(3), _______________(4) and thermal physics.
+To enter students take entrance examinations or are admitted based on unified state exam results. The university offers a 4-year _______________(5) and a 2-year Master’s degree programme. Programmes include professional courses, _______________(6) projects, and state final exams.
+The teaching staff consists of professors and highly qualified lecturers. The academic year has two terms. Students attend _______________(7), do laboratory work, and take exams after each term. Specialization begins in the third year.
+The institute has modern _______________(8), equipment, and a large library. Scientific conferences _______________(9) students’ outlook. There are also _______________(10) for sport and recreation.
+Students of the Smolensk Branch acquire good knowledge and _______________(11) prestigious diplomas to get _______________(12) in future.
+Look through the text in exercise 2; read the statements and say True/False/Not Stated. Correct the false statements.
+1. The Smolensk Branch of the Moscow Power Engineering Institute was established in the 20th century.
+2. Students can only enter the university by taking entrance examinations.
+3. A Bachelor’s degree programme takes five years to complete.
+4. All students must study foreign languages during their first year.
+5. The teaching staff includes professors and lecturers.
+6. Students take examinations three times a year.
+7. Specialization starts in the third year of studies.
+8. The university library is open 24 hours a day.
+9. Students can participate in sports activities at the university.
+10. The university offers free accommodation to all international students.
+11. Scientific conferences help students learn about modern developments.
+12. Graduates of this university always find jobs immediately after finishing their studies.
+Answer the questions about the Smolensk Branch of the Moscow Power Engineering Institute.
+1. When was the Smolensk Branch of the Moscow Power Engineering Institute founded?
+2. What subjects can students study at this university?
+3. How can students enter the institute?
+4. How long does a Bachelor’s degree programme last?
+5. How many years do students study for a Master’s degree?
+6. Who teaches at the university?
+7. What do students do during their studies?
+8. When does specialization begin?
+9. What equipment does the institute have?
+10. What are the facilities for?
+11. What do students get after finishing their studies at this university?
+12. Why is higher education important today?
+Speak about The Smolensk Branch of the Moscow Power Engineering Institute (National Research University) and the importance of higher education.
+Read short dialogues; which of the statements from the dialogues do you agree with? Create your own dialogues based on the examples.
+"Oliver, are you thinking about studying in the field of medicine or engineering?"
+"I want to study in the field of engineering - I think it's really important for the future."
+"My university has a great thermal engineering programme."
+"Really? I'd love to learn more about thermal engineering - it sounds very useful."
+"We need better equipment in our science labs at university."
+"Yes, good equipment helps students learn so much more easily."
+"Do you think nuclear energy is important for the future?"
+"I do - I think nuclear energy can help many countries get the power they need."
+"Are you planning to get a bachelor's degree in engineering?"
+"Yes, I'm working hard because a bachelor's degree is the first step to a good career."
+"Our professor says research is very important in technical education."
+"I agree - doing research helps you understand things much better than just reading books."
+"Did you go to all the lectures this week?"
+"Yes, I went to all the lectures - they were really helpful for my exam."
+"We spent the whole afternoon in the laboratories doing experiments."
+"I love working in the laboratories - you learn things you can't learn in a classroom."
+"Studying abroad can really broaden your knowledge and skills."
+"That's true - travelling and studying in a new country can broaden your ideas a lot."
+"Our university has very good facilities for engineering students."
+"Yes, the facilities here are excellent - we have everything we need to study well."
+"How can I obtain a place at a good technical university?"
+"You need good grades to obtain a place - and it helps to show you love the subject."
+"Technical education is very important for the advancement of society."
+"I completely agree - without advancement in science and engineering life wouldn't improve."
+LESSON 3 (6 hours)
+Topics: Higher Education in Russia and abroad
+Grammar: Continuous Tenses
+VOCABULARY SECTION 3
+Match the words and phrases to their definitions. Give Russian equivalents.
+Word/Phrase
+Definition
+succeed in study
+depend on
+make a decision
+consider
+assess
+assessment
+grade
+participate in
+participation
+competitive course
+think carefully about something
+need the help of someone or something
+a university program that is very difficult to get into because many students want to study it
+do well at school or university
+evaluate or estimate
+choose something after thinking about it
+the process of testing which checks how good something is
+take part in something; do activity
+joining in
+Fill in the gaps with the words and phrases.
+succeed in study; depend on; make a decision; consider; assess; assessment; grade; participate in; participation; competitive course
+Students should __________ 1 their interests before choosing a university.
+The right university choice can __________2 the student’s goals and learning style.
+Students need to __________3 about where they want to study.
+Both US and UK universities __________4 students in different ways.
+Essays, projects, and exams are different types of __________5.
+A student’s final __________6 can be important for university admission.
+Students can __________7 class discussions and group projects.
+Active __________8 in seminars discussions develop students’ communication skills and critical thinking.
+Medicine is an example of a __________9 in the UK.
+Good planning can help students __________10 and prepare for their future careers.
+Read the blog about the difference between higher education in the UK and the USA. Find the sentences with the words and phrases from the table (exercise 1); translate them into Russian.
+US vs* UK Universities: Key Differences, Admissions, and How to Choose
+Choosing between the US and UK university systems is one of the most important decisions a student can make. Both systems include highly respected institutions and can lead you to succeed in your studies and career, but they differ meaningfully in structure, admissions, cost, teaching style, student experience, and long-term career pathways. For this reason, the question is rarely about which system is “better”, but which is better organized for a particular student’s academic profile, interests, learning style, and future plans.
+Because of these differences there is no single "best" choice. The right choice depends on you: your interests, how you like to learn, what subjects you want to study, and what you want to do in the future.
+To make a good decision, you need to think about more than just university rankings or how famous a university is. You should also consider:
+which programs match your academic interests;
+how flexible the program is;
+how much money you will need;
+what career you want;
+where you want to live and work.
+When you understand these differences clearly, you can make a better choice about where to study.
+A clear understanding of these differences is essential to make a better choice about where to study.
+* vs– abbreviation for versus
+Teaching and Assessment Differences Between UK and US Universities
+One of the important differences between universities in the UK and the US is how students are taught and tested. The way students are assessed can vary a lot depending on the school and the subject.
+In the US students are often assessed through different types of work, such as essays, problem sets, projects, presentations, participation in class, and exams throughout the semester. This means that students get regular feedback and have many chances to show what they know. This system can be good for students who like to have ongoing support and check their progress regularly.
+In the UK, students usually have more exams at the end of the term or year, especially in traditional subjects. However, this doesn’t mean there are no other forms of assessment. Many courses also include coursework, lab reports, portfolios, and practical work, depending on the
+subject. Generally, UK students might need to work more independently between assessments and do well on fewer, more important exams.
+When comparing UK and US education systems, students should think about which style suits them best. Some students do better with regular structure and feedback, while others prefer to study more independently and dive deeper into their subjects.
+UK vs US Admissions
+The way students apply to universities in the UK and the US is quite different.
+In the US university admissions look at the whole student. This means that while good grades are important, universities also consider other things. These can include essays, activities outside of school (like sports or clubs), recommendation letters from teachers, and other signs of a student’s initiative and fit for the university. They want to understand the student as a complete person, not just based on exam results.
+In the UK university admissions focus more on academics and specific courses. Students apply through a system called UCAS for certain degree programs. Decisions are mostly based on how well students have done in school, their predicted grades, and if they fit well the course they want to study. The UCAS application now includes three specific questions to answer instead of just one personal statement. This change helps students reflect more clearly on their reasons for choosing their course.
+For some competitive courses in the UK, students may need to take extra tests depending on the subject and university. These tests can include the LNAT, UCAT, TSA, TMUA, or ESAT. Interviews are also important for some universities, especially at Oxford and Cambridge or for courses like Medicine. These interviews focus on how students think and solve problems with new information.
+In the US interviews are usually more personal. They help universities get a better idea of who the student is. It's important for students to prepare well for interviews in both countries because the style and purpose of the interviews can be very different.
+For students applying to UK universities it’s important to show a deep understanding of their chosen subject, a real interest in it, and clear reasons for why they want to study that course.
+Read the text again and choose the right answer.
+How are students in the US assessed?
+A. only one final exam
+B. essays, projects, presentations, class participation, and exams throughout the semester
+C. mostly exams at the end of the term or year
+D. only essays and written assignments
+In the UK students usually have:
+A. more exams at the end of the term or year
+B. only presentations and class participation
+C. daily quizzes and weekly tests
+D. regular assignments and projects throughout the semester
+What do US university admissions look at?
+A. only exam results
+B. only academic grades and predicted scores
+C. the whole student, including grades, essays, activities, and recommendation letters
+D. mainly sports and club activities
+What do UK university admissions focus on?
+A. the whole student, including sports and clubs
+B. academics and the specific course the student wants to study
+C. only teacher recommendation letters
+D. mainly the student's personality and character
+UK interviews at Oxford and Cambridge focus on:
+A. the student's activities outside of school
+B. how much the student has memorized
+C. understanding who the student is as a person
+D. how students think and solve problems with new information
+In the US interviews are usually:
+A. more personal, to understand who the student is
+B. testing subject knowledge and grades
+C. how students solve problems with new information
+D. why the student chose that specific course
+Agree or disagree with the statements students make about the universities in the UK and the USA. Use the phrases from the table.
+Phrases to agree
+Phrases to disagree
+I (completely) agree with you.
+I share your view on this matter.
+That's a good point.
+I'm afraid I can't agree with you there.
+That's an interesting perspective, however, I think…
+I see your point, but I have a different opinion.
+UK universities focus more on academic results than on sports and club activities.
+In the US students take only one final exam at the end of the year.
+Students in America receive feedback throughout the semester from different types of work.
+The UCAS system in the UK looks at the whole person not just their grades.
+Both the US and UK university systems can help students succeed in their careers.
+UK students usually need to work more independently between assessments.
+American universities don't care about students' grades when making admissions decisions.
+In the UK  all courses are assessed only through written exams.
+Students applying to Oxford or Cambridge may need to attend an interview.
+The best university system is the same for every student around the world.
+US university interviews help admissions officers understand who the student is as a person.
+When choosing a university, students should only think about how famous the institution is.
+Discuss the questions.
+How are students tested in your country? Do you take many small tests during the year or one big exam at the end? Which do you think is better?
+What do you need to do to apply to university in Russia? Do universities look at your grades, your hobbies, or both? How is this similar to or different from the UK and USA?
+In the UK students choose one subject to study at university. In the USA students can study many different subjects. What about  Russia? Do you think it's better to study one subject deeply or many subjects?
+The text says UK students work more independently. Do Russian students work independently or do they get help from teachers? Which style do you prefer?
+Do Russian universities interview students before accepting them? Do you think interviews are a good idea?
+The text mentions that students should think about money and where they want to live. Is it expensive to study at university in Russia? Where do students in Russia live when they enter the university? Do most Russian students study in their home city or do they move to another city?
+Fill in the missing information.
+Comparison Table: UK, US, and Russian Universities
+Category
+UK
+USA
+Russia
+Program Focus
+One subject (specialized)
+Multiple subjects (flexible)
+Program Length
+4 years (Bachelor's)
+Assessment
+Mostly final exams + some coursework
+Mix of exams and coursework
+Admissions Focus
+Whole student (grades, activities, essays, letters)
+Application System
+UCAS (centralized)
+Direct to each university
+Interviews
+Common for competitive courses (Oxford, Cambridge, Medicine)
+Teaching Style
+Regular feedback and support
+Tuiton fee
+(cost)
+High (£9,000-30,000/year for international students)
+Very high ($20,000-70,000/year)
+Language
+English
+Use the table and speak about the difference between higher education in Russia and the UK OR in Russia and the USA.
+GRAMMAR SECTION 3
+CONTINUOUS (PROGRASSIVE) TENSES
+Present Continuous
+- действие происходит в данный момент, сейчас
+Сигнальные слова: now, at the moment, at present
+Образование: am/is/are + Ving
++ He is working now.
+? Is he working now?
+- He isn’t working now.
+Past Continuous
+- действие происходило в определенный момент в прошлом
+Сигнальные слова: at 5 o’clock yesterday, when she came
+Образование: was/ were + Ving
++ He was working at 5 o’clock yesterday.
+? Was he working at 5 o’clock yesterday?
+- He wasn’t working at 5 o’clock yesterday.
+Future Continuous
+- действие будет происходить в определенный момент в будущем
+Сигнальные слова: at 5 o’clock tomorrow, when she comes
+Образование: will be + Ving
++ He will be working at 5 o’clock tomorrow.
+? Will he be working at 5 o’clock tomorrow?
+- He won’t be working at 5 o’clock tomorrow.
+Глаголы, которые не употребляются в Continuous:
+to know, to believe, to feel, to think (to have an opinion), to remember, to understand, to love, to like, to dislike, to hate, to prefer, to see, to hear, to be, to have, to need.
+1. Match the verb forms of the sentences to the tenses; name the signal words (сигнальные слова).
+Maria is studying computer science at the university now.
+Yesterday at 3 o’clock, the students were doing laboratory work in the chemistry class.
+Tom will be preparing for the test when she comes home,
+While the teacher was explaining the math problem, the students were taking notes in their notebooks.
+This time next week, we will be attending our first university lectures.
+Right now Maria is studying for her final exams at the library.
+Present Continuous Tense
+Future Continuous Tense
+Past Continuous Tense
+Put the verbs in brackets into the Present Continuous or Past Continuous.
+1. I (to write) an English exercise now. 2. I (to write) an English exercise at this time yesterday. 3. My little sister (to sleep) now. 4. My little sister (to sleep) at this time yesterday. 5. My friends (not to do) their homework now. They (to play) volleyball. 6. My friends (not to do) their homework at seven o’clock yesterday. They (to play) volleyball. 7. She (to read) the whole evening yesterday. 8. She (not to read) now. 9. Now she (to go) to school. 10. What you (to do) now? – I (to drink) tea.
+Put the verbs in brackets into the Present Continuous, Past Continuous or Future Continuous Tense.
+Now the teacher (explain) a new grammar rule. 2. While the teacher was talking, the students (listen) carefully. 3. Right now Anna (study) for her English test. 4. This time tomorrow our teacher (present) a new topic. 5. At the moment the students (do) their homework. 6. When I entered the classroom, Tom (read) a book. 7. When she came home, the children (prepare) for their exams. 8. This time next week we (study) in the school library. 9. This time tomorrow I (write) a test. 10. Now we (complete) a grammar exercise in class. 11. While the students were writing, the teacher (walk) around the room. 12. This time next week the students (take) their final exams.
+4. Put the verbs in brackets into the Present Continuous or Present Simple. Name signal words.
+1. She (to read) at the moment. 2. You usually (to go) to work by car? 3. He (to drink) coffee every morning. 4. They (to have) breakfast now. 5. I (not to watch) TV every night. 6. Look! She (to dance). 7. He (to have) breakfast every morning. 8. You (to listen) to music now? 9. We (to look) for our things now. 10. He (not to train) at the moment. 11. I (not to get up) at seven o’clock every morning. 12. Listen! She (to sing). 13. He (not to work) at weekends. 14. She (to type) a document at the moment. 15. They (to play) football now.
+5. Put the verbs in brackets into the Present Continuous or Present Simple. Past Continuous or Past Simple. Name signal words.
+1. His father (not to watch) TV at the moment. He (to sleep). 2. Pat (not to cook) dinner at the moment. She (to cook) dinner every Monday. 3. I (not to drink) coffee now. I (to write) an English exercise. 4. I (not to drink) coffee in the evening. I (to drink) coffee in the morning. 5. Your friend (to do) his homework now? 6. Look! The baby (to sleep). 7. The baby always (to sleep) after dinner. 8. My father (not to sleep) now. He (to work) in the garden. 9. I usually (to get) up at seven o’clock in the morning. 10. What your sister (to do) now? – She (to wash) the dishes. 11. When you usually (to come) home from school? – I (to come) at three o’clock. 12. Your sister (to study) at college? – No, she (to go) to school.
+6. Put the verbs in brackets into the Past Continuous or Past Simple.
+1. When I (to come) home, my little sister (to sleep). 2. When Nick (to come) home, his brother (to play) with his toys. 3. When mother (to come) home, I (to do) my homework. 4. When father (to come) home, Pete (to sleep). 5. When mother (to come) home, the children (to play). 6. When I (to get up), my mother and father (to drink) tea. 7. When I (to come) to my friend’s place, he (to watch) TV. 8. When I (to see) my friends, they (to play) football. 9. When I (to open) the door, the cat (to sit) on the table. 10. When Kate (to open) the door, the children (to dance).
+7.  Put the verbs in brackets into the Past Continuous or Past Simple.
+1. I (to play) computer games yesterday. 2. I (to play) computer games at five o’clock yesterday. 3. He (to play) computer games from two till three yesterday. 4. We (to play) computer games the whole evening yesterday. 5. My brother (not to play) tennis yesterday. 6. My sister (not to play) the piano at four o’clock yesterday. She (to play) the piano the whole evening. 7. When I came into the kitchen, mother (to cook). 8. She (to cook) the whole day yesterday. 9. We (to wash) our car yesterday. 10. We (to wash) our car from three till four yesterday. 11. You (to do) your homework yesterday? 12. You (to do) your homework from eight till ten yesterday? 13. Why she (to sleep) at seven o’clock yesterday? 14. He (to sit) at the table the whole evening yesterday. 15. What Nick (to do) when you came to his place? 16. What you (to do) when I rang you up? 17. I (not to sleep) at nine o’clock yesterday. 18. What he (to do) yesterday? — He (to read) a book. 19. What he (to do) the whole evening yesterday? — He (to read) a book. 20. She (to sleep) when you came home?
+LESSON 4 (4 hours)
+Topics: Characteristic Features
+Grammar: Perfect Tenses
+VOCABULARY SECTION 4
+Match the words to their definitions; give Russian equivalents.
+1. organized
+2. independent
+3. sociable
+4. disciplined
+5. hard-working
+6. responsible
+7. flexible
+8. motivated
+9. curious
+10. persistent
+a. want to learn or know more about something.
+b. able to do things alone without help from others.
+c. willing to talk and share ideas with others.
+d. keeping things in order and planning tasks carefully.
+e. putting a lot of effort and time into work or study.
+f. continue to do something even when it is difficult or takes a long time; not giving up easily.
+g. able to follow rules and control your actions well.
+h. able to change  or adapt to the new situation
+i. having a strong wish to achieve your goal.
+j. able to do what is needed and take care of things by yourself.
+Read the text; translate the sentences with the marked words. Answer the questions after the text.
+If you want to study well at university and get a good job in the future, you need to have some important personal qualities.
+First, you must be responsible and hard-working. This means you should complete all your homework on time and study regularly. Organized students plan their time well and never forget about deadlines.
+It is also important to be motivated and disciplined. When you have clear goals, you work harder to achieve them. Persistent people don't give up when something is difficult – they keep trying.
+At university  you need to be independent because teachers and parents don't control you like at school. You must make your own decisions and solve problems yourself.
+Students should be curious and ask questions at lectures and seminars and also do research work. Being sociable helps you work in groups and make friends with fellow group members.
+Finally, you should be flexible. University life and work are full of changes, so you must be ready to adapt to new situations. If you develop these qualities now, you will have a successful future!
+Which qualities mentioned in the text do you have?
+Which of them helped you to enter the university?
+Which of them do you need to develop?
+Read about Stephan and say what quality helps him to enjoy his student life.
+…And now some words about me. My name is Stephan. I am 18. I’m in the first year of studies at university now and I’m enjoying every moment of my student life now. I was born in Smolensk. As to my appearance, it’s quite ordinary: I am of middle height, slender, my hair is dark, my eyes are grey, so nothing special, I think.
+Speaking about my character I can say that I’m even-tempered and reserved. But sometimes I can lose my temper and become angry. My mom says I’m stubborn but I disagree with her. Actually, I’m persistent and it’s different, in my opinion. In fact, I’m cheerful and friendly. There are many things that I like and dislike. I like when everything is OK and things are going my way.
+I like to study because knowledge is useful sometimes. I’m fond of computer. I have got lots of computer games but use computer not only for playing, I surf the net to find useful information, watch films, chat with friends and make reports. I dislike talking over the phone. And I hate getting up early. But I’m happy I have more things I like than dislike.
+Fill in the information about Stephan.
+Stephan ______________ every moment of his student life.
+He describes his appearance as quite ______________.
+Stephan is even-tempered and ______________.
+He thinks he is ______________, not stubborn.
+Stephan surfs the net to find useful ______________.
+He dislikes talking over the ______________.
+Stephan is happy he has more things he ______________ than dislikes.
+Stephan says “..sometimes I can lose my temper and become angry”. Ask him 4 questions.
+Speak about your character; name the quality you need to develop, say why; mention what you like and dislike and what you are fond of; mention the qualities which help you to enjoy students’ life.
+Read “Speaking about characters” and write down 5 more words for personal qualities.
+Speaking about characters
+Lily, student: As for my character, I think, I am a calm person and rather modest. I am not sure but my friends say that I have good sense of humour. Actually, I love telling jokes and making my friends smile. I am quite sociable and talkative and I like being around people. I have a lot of friends and acquaintances. But sometimes I feel sad and want to stay alone. I think that’s OK because everybody has such moments. And I always try to find positive moments in life. I like to help people around and see how they become happy. I like kind, honest, polite, reliable and responsible people. And I hate when people are rude and aggressive.
+John, postgraduate: The proverb says: «No man is useless while he has a friend». It’s good to have a friend who has fine features of character: generosity, being reserved, reliable, intelligent, persistent in studying, honest, polite, punctual, kind, faithful, warmhearted .You can be always sincere with such a friend. I hate selfish, flattery, lazy, indifferent, boastful and greedy people.
+Kelly, teacher: The greatest value that guides me in my life is kindness, and it’s no wonder. Usually kindness is harmoniously connected with other good qualities. If a person is not kind, if he’s selfish, if he cares only about himself, then his other qualities - courage and will-power are worthless. You can see what a person is worth through his attitude towards others. If he is devoted to people, he is devoted to his work. Kindness is the main thing, the essence of what is best in a human-being.
+Richard, businessman: I think it’s good to develop persistence and confidence in oneself, because if a person is not reliable, he is unable to make conclusions and come to right decision in proper time. A person can prove to be a personality by his deeds, not by his words. The proverb says: «Actions speak louder than words».
+Sally, personnel manager: Personal qualities are characteristics of an individual. They are what make up one's personality. For example, responsibility and patience are qualities that employers would like a good worker to have. Other qualities employers value are: honesty, assertiveness, flexibility, problem solving, friendliness, intelligence, leadership, enthusiasm, and a good sense of humor. Most employers want people who are dependable and who get along with others. Though skills are important, an employer will select new employees based on their personal qualities as well.
+Read the statements and say if they are True, False or Not Stated. Correct the false statements.
+Lily is a quiet person who doesn't like talking to people.
+John thinks that generous and honest friends are important.
+Kelly believes that kindness is the most important quality.
+Richard says that words are more important than actions.
+Sally works as a personnel manager and knows what employers want.
+Lily hates rude and aggressive people.
+John is studying medicine at university.
+Kelly has been a teacher for ten years.
+Richard owns a successful business company.
+Sally interviews people every day for different jobs.
+Fill in the gaps with the words:
+modest, sociable, reliable, persistent, selfish, generous, assertive, flexible
+Maria is very __________. She always helps her friends and shares her lunch with them.
+Tom is a __________ student. He never gives up.
+My best friend is __________. I can always trust her with my secrets.
+John is too __________. He only thinks about himself and never helps others.
+Sarah is very __________. She loves meeting new people and talking to them.
+Good employees should be __________ because they need to adapt to changes at work.
+Emma is __________. She doesn't like to talk about her achievements.
+A manager must be __________ and confident when speaking to the team.
+Read the descriptions and match them to the people. One description is extra.
+He’s honest and shows true feelings without pretending or lying.
+She always wants to do things her own way.
+He always looks on the bright side of life.
+You can trust her and she always does what she says she will do.
+He rarely gets upset and he likes meeting people.
+She always wants to help and give more help or money than is usual or expected.
+She keeps their feelings hidden.
+1 Tony's optimistic.
+2 Fred's sincere.
+3 Claire's reserved.
+4 Bob's easy-going and sociable.
+5 Ann's honest and reliable.
+6 Sue's stubborn.
+Discuss the questions:
+Which person from “Speaking about the character “do you agree with most? Why?
+What are three personal qualities that describe you?
+What qualities do you look for in a good friend?
+What qualities are important for students to be successful?
+Do you agree that "actions speak louder than words"? Give an example.
+GRAMMAR SECTION 4
+Present Perfect
+- действие завершилось к определенному моменту в настоящем. Есть связь с настоящей ситуацией, результат.
+Сигнальные слова: already, just, yet, this week/ month/ year, today, ever, never, for, since
+Образование: have/ has (3л. ед. ч.) + V3
++ He has already done his homework.
+? Has he done his homework?
+- He hasn’t done his homework yet.
+Past Perfect
+- действие завершилось к определенному моменту в прошлом, «предпрошедшее» время
+Сигнальные слова: by 5 o’clock yesterday, before she came, when he arrived
+Образование: had + V3
++ Mother had cooked dinner when we came home.
+? Had mother cooked dinner when we came home?
+- Mother hadn’t cooked dinner when we came home.
+Future Perfect
+- действие завершится к определенному моменту в будущем
+Сигнальные слова: by 5 o’clock tomorrow, by the time she comes
+Образование: will have + V3
++ I will have done my homework by 5 o’clock tomorrow.
+? Will I have done my homework by 5 o’clock tomorrow?
+- I won’t have done my homework by 5 o’clock tomorrow.
+Match the verb forms of the sentences to the tenses; name the signal words (сигнальные слова).
+Maria has just completed her research paler.
+They have already chosen their major subjects for next term.
+The lecture had already begun when he arrived.
+Tom will have finished his first year at college by next July.
+Before she started university, Lisa had already learned basic computer skills.
+Present Perfect
+Past Perfect
+Future Perfect
+Put the verbs in brackets into the Present Perfect.
+1. I (to be) to London this year. 2. We (to see) this film already. 3. He (not to met) his parents. 4. She (to hear) this music before. 5. I (to write) a new book this month. 6. They (not to finish) their work yet. 7. Alan (not to have) his breakfast. 8. Cathy (not to get) up yet.9.  Martin (not to wash) up yet. 10. We (not to tell) him the truth. 11. You (to mention) my name? 12. Your mother already (to come)?
+Put the verbs in brackets into the Present Perfect. Choose since or for.
+1. I (to live) here (for/ since) 2008. 2. He (to work) there (for/ since) May. 3. They (to be) friends (for/ since) childhood. 4. We (to know) him (for/ since) three years. 5. They (to live) in our house (for/ since) two weeks. 6. She (to be) ill (for/ since) Friday. 7. She (to study) English (for/ since) five years. 8. We (not to see) him (for/ since) Saturday. 9. Lily (to study) at this university (for/ since) four years. 10. He (not to eat) (for/ since) morning.
+Put the verbs in brackets into the Past Perfect Tense.
+1.They (to finish) all preparations for the party by 5 o’clock yesterday. 2. The patient (to take) medicine at night and in the morning he felt much better. 3. I (to receive) her letter when he came home. 4. When we entered the hall the concert already (to begin). 5. He couldn’t enter his flat because he (to lose) his keys. 6. They heard that Jim (to marry). 7. She went abroad after she (to pass) exams. 8. I (to wash) my car by 7 o’clock yesterday. 9. When we came home my wife already (to cook) dinner. 10. The children already (to go) to bed by the time we arrived.
+Put the verbs in brackets into the Past Perfect Tense.
+1. I (to translate) the text before the bell. 2. She (to do) her exercises by the evening. 3. He (to clean) his room by five o’clock. 4. We (to speak) to him before the meeting. 5. Mother (to cook) dinner by seven o’clock. 6. Her son (not to do) his homework by nine o’clock. 7. She (not to make) a dress before party. 8. What they (to do) by three o’clock? 9. Who (not to write) the exercise before the bell? 10. Why you (not to wash) the dishes before your mother’s coming? 11. Your child (to go) to bed by ten o’clock? 12. You (to reach) your house before the sunset? 13. They (to receive) the telegram by that time? 14. Why they (not to have) lunch by twelve o’clock? 15. We (to have) dinner by eight o’clock.
+Put the verbs in brackets into the Future Perfect.
+1. I (to do) my homework by 5 o’clock tomorrow. 2. He (to write) a letter by the time she comes. 3. We (to build) a new house by the end of the year. 4. Mother (to cook) dinner when we come home. 5. They (not to arrive) by the evening. 6. The plane (not to arrive) by 10 o’clock. 7. He (to read) this book by the end of the month? 8. You (to finish) the job by his arrival? 9. We (to return) home by the time you phone us. 10. By the end of the week I (to translate) this article.
+Put the verbs in brackets into the Present Perfect or Past Simple Tense.  Name signal words.
+1. Last night I (to feel) tired and (to go) to bed very early. 2. Where you (to spend) your holidays? 3. You ever (to spend) your holidays abroad? 4. While traveling in Europe I (to meet) your friend. 5. I never (to visit) that place. 6. He (to visit) that place last year. 7. I just (to get) a letter from Tom. 8. You (to take) any photographs while traveling in the south? 9. He (to be) abroad five years ago. 10. You (to be) in America last year?
+Put the verbs in brackets into the Present Perfect or Past Simple Tense.  Name signal words.
+1. She (to be) to Paris this year. 2. George (to travel) to Europe last year. 3. You ever (to see) the sunrise? 4. She (to go) home two hours ago. 5. He is free now. He (to pass) his final exam. 6. I (to leave) home early last time. 7. We (not to see) them last week. 8. I (not to decide) yet where to go tonight. 9. He (to work) here two weeks ago? 10. Mike (to read) this book before?
+Put the verbs in brackets into the Past Perfect or Past Simple Tense.
+1. When I (to come) home, mother already (to cook) dinner. 2. When father (to return) from work, we already (to do) our homework. 3. When the teacher (to enter) the classroom, the pupils already (to open) their books. 4. Kate (to give) me the book which she (to buy) the day before. 5. Nick (to show) the teacher the picture which he (to draw). 6. The boy (to give) the goats the grass which he (to bring) from the field. 7. Mother (to see) that Nick (not to wash) his hands. 8. The teacher (to understand) that Liz (not to do) her homework. 9. When we (to come) to the station, the train already (to leave). 10. Tom (to return) from the cinema at five o'clock. 11. Tom (to return) from the cinema by five o'clock. 12. I (to finish) my homework at seven o'clock. 13. I (to finish) my homework by seven o'clock. 14. He (to think) that he (to lose) the money. 15. Ann (to tell) me that she (to see) an interesting film. 16. When I (to wake) up yesterday, father already (to go) to work. 17. Nick (to think) that his father (not yet to come) home. 18. Mary (to tell) us that she (to cook) a good dinner. 19. Yesterday I (to find) the book which I (to lose) in summer. 20. Jack (to remember) that he (not to phone) his girlfriend.
+10. Put the verbs in brackets into the Past Perfect or Past Simple Tense.
+1. By 2 o’clock yesterday the teacher (to examine) all the students. 2. On my way to University I (to remember) that I (to leave) my textbook at home. 3. My friends (to be) glad that I (to pass) all exams. 4. He (to open) his eyes, (to look) around and (to try) to remember what (to happen) to him. 5. My friend (to visit) the village where he (to live) in his childhood. 6. Where you (to work) before you (to enter) the Institute? 7. He (to study) French before he (to enter) the university. 8. Kate (to say) that she (to get) her education in Oxford. 9. She (to be) happy that she (to buy) a new pair of shoes. 10. Jerry (not to sleep) because he (to drink) a lot of coffee.
+11. Choose the correct verb form; write down the signal word.
+1. We ________________ to the cinema every Saturday.
+A. go
+B. goes
+C. are going
+D. went
+Signal word: _______________
+2. Look! The children ________________ in the garden right now.
+A. play
+B. plays
+C. are playing
+D. played
+Signal word: _______________
+3. Yesterday, I ________________ my grandmother in the hospital.
+A. visit
+B. visited
+C. have visited
+D. was visiting
+Signal word: _______________
+4. She ________________ already ________________ three books this month.
+A. did / read
+B. has / read
+C. have / read
+D. was / reading
+Signal word: _______________
+5. Next year, we ________________ to Spain for our vacation.
+A. travel
+B. traveled
+C. will travel
+D. are traveling
+Signal word: _______________
+6. At 9 a.m. that morning my dad ________________ an important meeting.
+A. had
+B. was having
+C. has had
+D. had had
+Signal word: _______________
+7. They ________________ in this house since 2010.
+A. live
+B. lived
+C. are living
+D. have been living
+Signal word: _______________
+8. Be quiet! The baby ________________ at the moment.
+A. sleeps
+B. is sleeping
+C. slept
+D. has slept
+Signal word: _______________
+9. Two days ago, Tom ________________ his bicycle in the park.
+A. rides
+B. rode
+C. has ridden
+D. was riding
+Signal word: _______________
+10. I think it ________________ sunny tomorrow.
+A. is
+B. was
+C. will be
+D. has been
+Signal word: _______________
+12. Put the verbs in brackets into the right tense: Present Simple, Past Simple, Future Simple; Present Continuous, Past Continuous; Present Perfect or Past Perfect.
+1. My friend (to like) ice cream. He (to eat) ice cream every day. Look, he (to eat) ice cream now. He (to buy) ice cream tomorrow too. When I (to meet) him yesterday he (to eat) ice cream. He (to say) that he (to eat) one ice cream already by that time. 2. I always (to come) to university at a quarter past eight. Yesterday I (to come) to university at half past eight. Tomorrow I (not to go) to university because we (not to study) on Saturdays. 3. My brother (to train) from two till four yesterday. 4. I (not to dance) for ages. 5. He never (to be) to France. 6. When he (to return) home yesterday his friends (to play) football. 7. When we (to enter) the classroom, the lecture already (to start). 8. Listen! Mary (to sing). 9. She (not to visit) her grandparents very often. 10. They (not to see) him last week. 11. What you (to do) at six o’clock yesterday? 12. He (to look) for a new job now? 13. What time you usually (to have) breakfast? 14. How often she (visit) fitness centre? 15. You (to meet) him at the conference last month? 16. She (to go) to disco next week?
+13.  Put the verbs in brackets into the correct tense (Present Simple, Past Simple, Future Simple, Present Continuous, Past Continuous, Present Perfect, or Past Perfect).
+I _____________ (already/visit) three universities before I made my final decision last month.
+My sister _____________ (study) at Oxford University right now, and she really enjoys it.
+When the teacher _____________ (enter) the classroom yesterday, all the students _____________ (work) on their projects.
+University admissions in the UK usually _____________ (focus) on academic results rather than extracurricular activities.
+We _____________ (submit) our UCAS applications next week, so we need to finish our personal statements soon.
+How long _____________ you _____________ (prepare) for your entrance exams? You look tired!
+Last year, my brother _____________ (take) the LNAT test because he _____________ (want) to study Law.
+I _____________ (never/be) to the USA, but I _____________ (plan) to visit some universities there next summer.
+While I _____________ (read) about different universities yesterday evening, my phone _____________ (ring) several times.
+Most students in my class _____________ (not/decide) which university system they prefer yet.
+14.  Read the email and put the verbs in brackets into the correct tense (Present Simple, Past Simple, Future Simple, Present Continuous, Past Continuous, Present Perfect, or Past Perfect).
+Hi Maria,
+How are you? I hope everything _____________ (go) well with your studies!
+I _____________ (write) to tell you about my university application process. It's so stressful! Last week, I _____________ (attend) an online information session about UK universities, and I _____________ (learn) so many interesting things. While the admissions officer _____________ (explain) the UCAS system, I _____________ (realize) that I need to focus on just one subject.
+The problem is that I _____________ (not/choose) my course yet. I _____________ (think) about it for three months already, but I still can't decide between Psychology and Education. My parents _____________ (always/say) that I should study something practical, but I want to follow my passion.
+Yesterday, I _____________ (talk) to my school consultant while my classmates _____________ (fill) in their application forms. She told me that most students _____________ (feel) confused at this stage, so I shouldn't worry too much.
+Before I met her, I _____________ (already/research) about 15 different universities! Can you believe it? Now I _____________ (try) to narrow down my choices to five universities for my UCAS application.
+I _____________ (visit) two universities next month with my parents. I'm really excited! What about you? _____________ you _____________ (make) any decisions about your future studies yet?
+Write back soon!
+Best wishes,
+Anton
+`;
+    const reader = document.getElementById('reader');
+    const toc = document.getElementById('toc');
+
+    function appendText(parent, text) {
+      const p = document.createElement('p');
+      p.textContent = text.trim();
+      parent.appendChild(p);
+    }
+
+    function buildTableFromLines(lines) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'two-col-table';
+      for (const line of lines) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        const match = line.match(/^([0-9]+\.|[a-k]\.)\s*(.+)$/i);
+        if (match) {
+          const label = document.createElement('span');
+          label.className = 'cell-label';
+          label.textContent = match[1].replace(/\.$/, '');
+          const value = document.createElement('div');
+          value.textContent = match[2];
+          cell.appendChild(label);
+          cell.appendChild(value);
+        } else {
+          const value = document.createElement('div');
+          value.textContent = line;
+          cell.appendChild(value);
+        }
+        wrapper.appendChild(cell);
+      }
+      return wrapper;
+    }
+
+    function renderExerciseBlock(block) {
+      const box = document.createElement('div');
+      box.className = 'exercise-box';
+
+      const lines = block.split(/\n/).map(line => line.trim()).filter(Boolean);
+      if (!lines.length) return box;
+
+      const first = lines[0];
+      const numberedPrompt = first.match(/^\d+\.\s*(.+)$/);
+      if (/^(Word\/Phrase|Definition|Vocabulary Section|Match the phrases|Fill in the gaps|Make sentences|Read the story|Look through the story|Discuss the questions|Read four opinions|Grammar practice|Exercises|Exercise|List of words:|Examples:)/i.test(first)) {
+        const h3 = document.createElement('h3');
+        h3.textContent = first;
+        box.appendChild(h3);
+
+        const rest = lines.slice(1);
+        if (rest.length) {
+          const isWordDefinitionPair = rest.some(line => /^\d+\./.test(line)) && rest.some(line => /^[a-k]\./i.test(line));
+          if (isWordDefinitionPair) {
+            const leftItems = rest.filter(line => /^\d+\./.test(line)).map(line => line.replace(/^\d+\.\s*/, ''));
+            const rightItems = rest.filter(line => /^[a-k]\./i.test(line)).map(line => line.replace(/^[a-k]\.\s*/i, ''));
+            const pairTable = document.createElement('div');
+            pairTable.className = 'two-col-table';
+            const total = Math.max(leftItems.length, rightItems.length);
+            for (let index = 0; index < total; index++) {
+              const cell = document.createElement('div');
+              cell.className = 'cell';
+              const label = document.createElement('span');
+              label.className = 'cell-label';
+              label.textContent = index + 1;
+              const value = document.createElement('div');
+              value.textContent = leftItems[index] || '—';
+              cell.appendChild(label);
+              cell.appendChild(value);
+              pairTable.appendChild(cell);
+
+              const answer = document.createElement('div');
+              answer.className = 'cell';
+              const answerLabel = document.createElement('span');
+              answerLabel.className = 'cell-label';
+              answerLabel.textContent = String.fromCharCode(97 + index);
+              const answerValue = document.createElement('div');
+              answerValue.textContent = rightItems[index] || '—';
+              answer.appendChild(answerLabel);
+              answer.appendChild(answerValue);
+              pairTable.appendChild(answer);
+            }
+            box.appendChild(pairTable);
+            return box;
+          }
+
+          const text = rest.join(' ');
+          const p = document.createElement('p');
+          p.textContent = text;
+          box.appendChild(p);
+        }
+        return box;
+      }
+
+      if (numberedPrompt && /^(Fill in the gaps|Make sentences|Read the story|Look through the story|Discuss the questions|Read four opinions|Match the phrases|Grammar practice|Exercises|Exercise)/i.test(numberedPrompt[1])) {
+        const h3 = document.createElement('h3');
+        h3.textContent = numberedPrompt[1];
+        box.appendChild(h3);
+        const rest = lines.slice(1);
+        if (rest.length) {
+          const list = document.createElement('ul');
+          rest.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            list.appendChild(li);
+          });
+          box.appendChild(list);
+        }
+        return box;
+      }
+
+      if (lines.some(line => /^\d+\.|^[a-k]\./.test(line)) && lines.some(line => /[A-Za-z]/.test(line))) {
+        const table = buildTableFromLines(lines);
+        box.appendChild(table);
+        return box;
+      }
+
+      const text = lines.join(' ');
+      const p = document.createElement('p');
+      p.textContent = text;
+      box.appendChild(p);
+      return box;
+    }
+
+    const lessons = source
+      .split(/(?=LESSON\s+\d+)/i)
+      .map(part => part.trim())
+      .filter(part => /(^|\n)LESSON\s+\d+/i.test(part));
+
+    lessons.forEach((lessonText, index) => {
+      const lines = lessonText.split(/\n/).map(line => line.trim()).filter(Boolean);
+      const head = lines.find(line => /^LESSON\s+\d+/i.test(line)) || `LESSON ${index + 1}`;
+      const match = head.match(/LESSON\s+(\d+)/i);
+      const lessonNumber = match ? match[1] : index + 1;
+      const lessonId = `lesson-${lessonNumber}`;
+
+      const section = document.createElement('section');
+      section.className = 'lesson';
+      section.id = lessonId;
+
+      const title = document.createElement('h2');
+      title.textContent = `Урок ${lessonNumber}`;
+      section.appendChild(title);
+
+      const meta = document.createElement('div');
+      meta.className = 'lesson-meta';
+      const topic = document.createElement('span');
+      topic.className = 'pill';
+      const topicText = head
+        .replace(/^LESSON\s+\d+\s*/i, '')
+        .replace(/\s*\([^)]*\)\s*$/, '')
+        .trim();
+      topic.textContent = topicText || 'English';
+      meta.appendChild(topic);
+      section.appendChild(meta);
+
+      const lessonLines = lessonText.split(/\n/).map(line => line.trim()).filter(Boolean);
+      const blocks = [];
+      let currentBlock = [];
+
+      const flushBlock = () => {
+        if (!currentBlock.length) return;
+        blocks.push(currentBlock.join('\n'));
+        currentBlock = [];
+      };
+
+      lessonLines.forEach((line, index) => {
+        if (index === 0 && /^LESSON\s+\d+/i.test(line)) return;
+        const isSectionMarker = /^(Topics:|Grammar:|Vocabulary|Vocabulary Section|CRAMMAR SECTION|Exercises|Exercise|Grammar practice|Word\/Phrase|Definition|Match the phrases|Fill in the gaps|Make sentences|Read the story|Look through the story|Discuss the questions|Read four opinions|List of words:|Examples:|\d+\.|[a-k]\.)/i.test(line);
+        if (isSectionMarker && currentBlock.length) {
+          flushBlock();
+        }
+        currentBlock.push(line);
+      });
+      flushBlock();
+
+      blocks.forEach((block) => {
+        const normalized = block.replace(/\s+/g, ' ').trim();
+        if (!normalized) return;
+        if (/^(Topics:|Grammar:|Vocabulary|Vocabulary Section|CRAMMAR SECTION|Exercises|Exercise|Grammar practice)/i.test(normalized)) {
+          const h3 = document.createElement('h3');
+          h3.textContent = normalized;
+          section.appendChild(h3);
+          return;
+        }
+        const rendered = renderExerciseBlock(block);
+        section.appendChild(rendered);
+      });
+      reader.appendChild(section);
+
+      const link = document.createElement('a');
+      link.href = `#${lessonId}`;
+      link.textContent = `Урок ${lessonNumber}`;
+      toc.appendChild(link);
+    });
+
+    const links = [...document.querySelectorAll('.toc a')];
+    const sections = [...document.querySelectorAll('.lesson')];
+    function updateActive() {
+      const scrollY = window.scrollY + 140;
+      let activeId = sections[0]?.id || null;
+      for (const section of sections) {
+        if (section.offsetTop <= scrollY) activeId = section.id;
+      }
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`));
+    }
+    updateActive();
+    window.addEventListener('scroll', updateActive, { passive: true });
+  </script>
+</body>
+</html>
+
