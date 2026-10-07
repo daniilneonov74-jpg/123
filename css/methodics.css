@@ -173,7 +173,7 @@
       height: 180px;
       object-fit: cover;
       border-bottom: 1px solid var(--line);
-      background: #f2e3d5;
+      background: var(--soft);
     }
     .resource-card .body {
       padding: 12px 14px 14px;
@@ -221,7 +221,7 @@
     .viewer-panel {
       width: min(1100px, 92vw);
       max-height: 90vh;
-      background: #fffdf9;
+      background: var(--card);
       border: 1px solid var(--line);
       border-radius: 18px;
       overflow: hidden;
@@ -234,7 +234,7 @@
       gap: 12px;
       padding: 14px 16px;
       border-bottom: 1px solid var(--line);
-      background: rgba(248, 241, 231, .9);
+      background: var(--soft);
     }
     .viewer-head h3 {
       margin: 0;
@@ -254,7 +254,7 @@
     }
     .viewer-body {
       padding: 12px;
-      background: #f7f1ea;
+      background: var(--paper);
       height: min(76vh, 760px);
     }
     .viewer-body iframe,

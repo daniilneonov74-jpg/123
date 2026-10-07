@@ -10,7 +10,6 @@
       --green: #6f8066;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -122,11 +121,11 @@
     .schedule-now > span:not(.schedule-now-kicker) { color: var(--muted); font-size: 13px; }
     .schedule-now time { color: var(--accent-dark); font-size: clamp(30px, 5vw, 46px); font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: .035em; line-height: 1.1; }
     .schedule-now small { color: var(--muted); font-size: 12px; }
-    .schedule-now-active { border-color: color-mix(in srgb, #55a36d 38%, var(--line)); background: linear-gradient(135deg, var(--card), color-mix(in srgb, #55a36d 8%, var(--card))); }
-    .schedule-now-active .schedule-now-kicker { color: #438354; }
-    .schedule-now-active time { color: #438354; animation: countdown-glow 2s ease-in-out infinite; }
-    .schedule-now-break { border-color: color-mix(in srgb, #d4a43d 40%, var(--line)); background: linear-gradient(135deg, var(--card), color-mix(in srgb, #d4a43d 9%, var(--card))); }
-    .schedule-now-break .schedule-now-kicker, .schedule-now-break time { color: #9a7121; }
+    .schedule-now-active { border-color: color-mix(in srgb, var(--success-tint) 38%, var(--line)); background: linear-gradient(135deg, var(--card), color-mix(in srgb, var(--success-tint) 8%, var(--card))); }
+    .schedule-now-active .schedule-now-kicker { color: var(--success); }
+    .schedule-now-active time { color: var(--success); animation: countdown-glow 2s ease-in-out infinite; }
+    .schedule-now-break { border-color: color-mix(in srgb, var(--warning-tint) 40%, var(--line)); background: linear-gradient(135deg, var(--card), color-mix(in srgb, var(--warning-tint) 9%, var(--card))); }
+    .schedule-now-break .schedule-now-kicker, .schedule-now-break time { color: var(--warning); }
     .schedule-now-finished, .schedule-now-weekend { min-height: 140px; justify-content: center; }
     .schedule-now-finished .schedule-now-kicker { color: var(--muted); }
     .schedule-now-empty { min-height: 140px; justify-content: center; }
@@ -148,20 +147,20 @@
     .today-lesson-details { color: var(--muted); font-size: 12px; line-height: 1.4; }
     .today-lesson-status { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .04em; }
     .today-lesson-countdown { color: var(--accent-dark); font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
-    .today-lesson.active { border-color: color-mix(in srgb, #55a36d 40%, var(--line)); background: color-mix(in srgb, #55a36d 6%, var(--card)); box-shadow: inset 3px 0 #55a36d; }
-    .today-lesson.active .today-lesson-status { color: #438354; }
+    .today-lesson.active { border-color: color-mix(in srgb, var(--success-tint) 40%, var(--line)); background: color-mix(in srgb, var(--success-tint) 6%, var(--card)); box-shadow: inset 3px 0 var(--success-tint); }
+    .today-lesson.active .today-lesson-status { color: var(--success); }
     .today-lesson.next { border-color: color-mix(in srgb, var(--accent) 32%, var(--line)); box-shadow: inset 3px 0 var(--accent); }
-    .today-lesson.finished, .today-lesson.empty { opacity: .52; background: color-mix(in srgb, var(--paper) 76%, #b7b7b7); filter: grayscale(.82); }
+    .today-lesson.finished, .today-lesson.empty { opacity: .62; background: color-mix(in srgb, var(--card) 86%, var(--disabled)); filter: grayscale(.82); }
     .today-lesson.finished .today-lesson-content strong, .today-lesson.empty .today-lesson-content strong { color: var(--muted); }
     .full-schedule { margin-top: 28px; scroll-margin-top: 24px; animation: appear .25s ease both; }
     .full-schedule[hidden] { display: none; }
     .full-schedule-head { align-items: center; margin-bottom: 18px; }
     .full-schedule-head h3 { margin: 0 0 4px; font: 500 27px/1.1 Georgia, serif; }
     .schedule[hidden] { display: none; }
-    @keyframes countdown-glow { 0%, 100% { text-shadow: 0 0 0 transparent; } 50% { text-shadow: 0 0 18px color-mix(in srgb, #55a36d 28%, transparent); } }
+    @keyframes countdown-glow { 0%, 100% { text-shadow: 0 0 0 transparent; } 50% { text-shadow: 0 0 18px color-mix(in srgb, var(--success-tint) 28%, transparent); } }
     .schedule { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
     .day { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
-    .day-title { padding: 17px 16px 14px; border-bottom: 1px solid var(--line); background: #f2e6d7; }
+    .day-title { padding: 17px 16px 14px; border-bottom: 1px solid var(--line); background: var(--soft); }
     .day-title strong { display: block; font-size: 16px; }
     .day-title span { color: var(--muted); font-size: 12px; }
     .lesson { min-height: 126px; padding: 14px 15px; border-bottom: 1px solid var(--line); }
@@ -170,7 +169,7 @@
     .subject { margin: 10px 0 8px; font-weight: 700; line-height: 1.3; font-size: 14px; }
     .teacher, .room { color: var(--muted); font-size: 12px; line-height: 1.4; }
     .room { display: inline-block; margin-top: 8px; padding: 3px 7px; border-radius: 5px; background: var(--soft); }
-    .empty { color: #ae9f91; font-size: 13px; padding-top: 16px; }
+    .empty { color: var(--muted); font-size: 13px; padding-top: 16px; }
 
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .info-card { min-height: 190px; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
@@ -239,7 +238,7 @@
     .duty-row { display: grid; grid-template-columns: 90px 1fr; gap: 10px; padding: 9px 13px; border-top: 1px solid var(--line); font-size: 12px; }
     .duty-row time { color: var(--accent); font-weight: 800; }
     .duty-row span { display: flex; align-items: center; gap: 8px; font-weight: 700; }
-    .duty-row.today { background: #fff3df; }
+    .duty-row.today { background: color-mix(in srgb, var(--accent) 12%, var(--card)); }
     .duty-row.today time { color: var(--accent-dark); }
     .duty-dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: #d7743e; box-shadow: 0 0 0 4px rgba(215,116,62,.16), 0 0 12px rgba(215,116,62,.9); animation: duty-pulse 1.5s ease-in-out infinite; }
     @keyframes duty-pulse { 0%, 100% { opacity: .65; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.2); } }
@@ -377,6 +376,17 @@
     .theme-heading strong { font-size: 11px; }
     .theme-heading span { margin-top: 3px; color: var(--muted); font-size: 10px; }
     .theme-options { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; padding: 12px 2px 5px; }
+    .theme-mode-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; padding: 10px 3px 3px; border-top: 1px solid var(--line); cursor: pointer; }
+    .theme-mode-row > span:first-child { display: grid; gap: 3px; }
+    .theme-mode-row strong { font-size: 11px; }
+    .theme-mode-row small { color: var(--muted); font-size: 10px; }
+    .theme-mode-input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+    .theme-mode-switch { display: flex; width: 43px; height: 25px; align-items: center; padding: 3px; border: 1px solid var(--line); border-radius: 99px; background: var(--soft); transition: background .2s ease, border-color .2s ease; }
+    .theme-mode-switch i { width: 17px; height: 17px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 4px rgba(0,0,0,.22); transition: transform .2s ease, background .2s ease; }
+    .theme-mode-input:checked + .theme-mode-switch { border-color: var(--accent); background: var(--accent); }
+    .theme-mode-input:checked + .theme-mode-switch i { transform: translateX(18px); background: #fff; }
+    .theme-mode-input:focus-visible + .theme-mode-switch { outline: 3px solid color-mix(in srgb, var(--accent) 40%, transparent); outline-offset: 3px; }
+    .help-theme-setting { margin: 7px 5px 2px; padding-right: 5px; padding-left: 5px; border-top-color: var(--line); }
     .theme-swatch {
       width: 25px; height: 25px; justify-self: center; border: 3px solid var(--paper);
       border-radius: 50%; background: var(--swatch); cursor: pointer;

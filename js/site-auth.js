@@ -1,4 +1,15 @@
 (() => {
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.addEventListener('pointermove', event => {
+      document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
+      document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
+      document.documentElement.classList.add('cursor-glow-visible');
+    }, { passive: true });
+    document.addEventListener('pointerleave', () => {
+      document.documentElement.classList.remove('cursor-glow-visible');
+    });
+  }
+
   const loader = document.getElementById('site-loader');
   const gate = document.getElementById('auth-gate');
   const form = document.getElementById('auth-form');
@@ -11,6 +22,7 @@
   const errorMessage = document.getElementById('auth-error');
   const googleButton = document.getElementById('auth-google');
   const profileName = document.getElementById('profile-name');
+  const themeModeToggles = document.querySelectorAll('[data-theme-mode-toggle]');
   const creatorUid = 'joCInK8h1odw5hnknvtNk8gOeoC2';
   let authMode = 'login';
   let currentUser = null;
@@ -26,6 +38,33 @@
   let pageIsActive = document.visibilityState === 'visible';
 
   const themes = ['terracotta', 'ocean', 'sage', 'plum', 'midnight', 'rose', 'amber', 'slate'];
+
+  function setColorMode(mode) {
+    const selectedMode = mode === 'dark' ? 'dark' : 'light';
+    document.documentElement.dataset.colorMode = selectedMode;
+    themeModeToggles.forEach(themeModeToggle => {
+      themeModeToggle.checked = selectedMode === 'dark';
+      themeModeToggle.setAttribute('aria-checked', String(selectedMode === 'dark'));
+    });
+    document.querySelectorAll('[data-theme-mode-label]').forEach(label => {
+      label.textContent = selectedMode === 'dark' ? 'Тёмная тема' : 'Светлая тема';
+    });
+    try {
+      localStorage.setItem('aes26-color-mode', selectedMode);
+    } catch (error) {
+      console.error('Не удалось сохранить режим оформления:', error);
+    }
+  }
+
+  try {
+    setColorMode(localStorage.getItem('aes26-color-mode') || 'light');
+  } catch (error) {
+    console.error('Не удалось прочитать режим оформления:', error);
+    setColorMode('light');
+  }
+  themeModeToggles.forEach(themeModeToggle => themeModeToggle.addEventListener('change', () => {
+    setColorMode(themeModeToggle.checked ? 'dark' : 'light');
+  }));
 
   function setTheme(theme) {
     const selectedTheme = themes.includes(theme) ? theme : 'terracotta';

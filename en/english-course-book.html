@@ -4,18 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Английский — методичка</title>
+  <link rel="stylesheet" href="../css/auth.css">
   <style>
-    :root {
-      --ink: #2e2925;
-      --muted: #786e64;
-      --paper: #f8f1e7;
-      --card: #fffaf3;
-      --line: #ddcdbc;
-      --accent: #a45f43;
-      --accent-dark: #76422f;
-      --soft: #efe1d1;
-      --shadow: 0 18px 40px rgba(46, 41, 37, 0.08);
-    }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -124,7 +114,36 @@
     }
   </style>
 </head>
-<body>
+<body class="auth-pending">
+  <div class="site-loader" id="site-loader" role="status" aria-live="polite">
+    <div class="loader-mark">А26</div>
+    <div class="loader-track"><span></span></div>
+    <p>Загружаем портал АЭС-26</p>
+  </div>
+  <section class="auth-gate" id="auth-gate" aria-labelledby="auth-title" hidden>
+    <div class="auth-card">
+      <div class="auth-brand-mark">А26</div>
+      <p class="auth-eyebrow">Портал в чудо</p>
+      <h1 id="auth-title">Добро пожаловать</h1>
+      <p class="auth-intro">Войдите или зарегистрируйтесь, чтобы открыть сайт и участвовать в общей статистике.</p>
+      <form id="auth-form">
+        <label id="auth-nickname-label" hidden>Никнейм
+          <input id="auth-nickname" name="nickname" type="text" maxlength="24" autocomplete="nickname" placeholder="Как вас показывать в рейтинге">
+        </label>
+        <label>Email
+          <input id="auth-email" name="email" type="email" required autocomplete="email" placeholder="name@example.com">
+        </label>
+        <label>Пароль
+          <input id="auth-password" name="password" type="password" required minlength="6" autocomplete="current-password" placeholder="Не менее 6 символов">
+        </label>
+        <p id="auth-error" class="auth-message" role="alert"></p>
+        <button class="auth-submit" id="auth-submit" type="submit">Войти</button>
+      </form>
+      <button class="auth-google" id="auth-google" type="button">Продолжить с Google</button>
+      <button class="auth-mode-switch" id="auth-mode-switch" type="button">Нет аккаунта? Зарегистрироваться</button>
+      <p class="auth-privacy">В рейтинге отображаются только никнейм и активное время. Email не публикуется.</p>
+    </div>
+  </section>
   <header>
     <div class="shell header-row">
       <a class="brand" href="../methodics.html">
@@ -145,6 +164,11 @@
     </div>
   </main>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js" defer></script>
+  <script src="../js/source-protection.js" defer></script>
+  <script src="../js/site-auth.js" defer></script>
   <script>
     const source = `О.А. Близнюк
 English Course Book
@@ -1091,4 +1115,3 @@ Anton
   </script>
 </body>
 </html>
-

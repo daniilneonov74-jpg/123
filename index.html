@@ -83,6 +83,11 @@
               <button class="theme-swatch" type="button" data-theme-choice="amber" aria-label="Янтарный" title="Янтарный"></button>
               <button class="theme-swatch" type="button" data-theme-choice="slate" aria-label="Графитовый" title="Графитовый"></button>
               </div>
+              <label class="theme-mode-row" for="theme-mode-toggle">
+                <span><strong>Оформление</strong><small data-theme-mode-label>Светлая тема</small></span>
+                <input class="theme-mode-input" id="theme-mode-toggle" data-theme-mode-toggle type="checkbox" role="switch" aria-label="Переключить тёмную тему">
+                <span class="theme-mode-switch" aria-hidden="true"><i></i></span>
+              </label>
             </div>
             <button class="menu-item sign-out-button" id="sign-out" type="button">Выйти из аккаунта</button>
           </nav>
@@ -243,6 +248,11 @@
         <button class="help-option" type="button" data-help-view="complaint"><span>!</span><span><strong>Жалоба по сайту</strong><small>Расскажите о проблеме</small></span><b aria-hidden="true">›</b></button>
         <button class="help-option" type="button" data-help-view="chat"><span>☻</span><span><strong>Чат студентов</strong><small>Общайтесь с участниками группы</small></span><b aria-hidden="true">›</b></button>
         <button class="help-option admin-feedback-option" id="open-feedback-inbox" type="button" data-help-view="feedback-inbox" hidden><span>▤</span><span><strong>Обращения</strong><small>Предложения и жалобы пользователей</small></span><b aria-hidden="true">›</b></button>
+        <label class="theme-mode-row help-theme-setting" for="help-theme-mode-toggle">
+          <span><strong>Тёмная тема</strong><small data-theme-mode-label>Светлая тема</small></span>
+          <input class="theme-mode-input" id="help-theme-mode-toggle" data-theme-mode-toggle type="checkbox" role="switch" aria-label="Переключить тёмную тему">
+          <span class="theme-mode-switch" aria-hidden="true"><i></i></span>
+        </label>
       </div>
       <section class="help-view help-form-view" id="help-feedback" hidden>
         <button class="help-back" type="button" data-help-back>← Назад</button>
@@ -304,6 +314,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/source-protection.js" defer></script>
   <script src="js/site-auth.js" defer></script>
   <script src="js/feedback-config.js" defer></script>
   <script src="js/index.js" defer></script>
