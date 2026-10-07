@@ -1,0 +1,7 @@
+name = "aes26-telegram-feedback"
+main = "src/index.js"
+compatibility_date = "2026-10-07"
+
+[vars]
+FIREBASE_PROJECT_ID = "aes-26"
+ALLOWED_ORIGINS = "https://aes-26.web.app,https://aes-26.firebaseapp.com"

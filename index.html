@@ -3,205 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>АЭС-26 — расписание группы</title>
+  <title>АЭС-26</title>
   <meta name="description" content="Расписание и информация для группы АЭС-26">
-  <style>
-    :root {
-      --ink: #2e2925;
-      --muted: #786e64;
-      --paper: #f8f1e7;
-      --card: #fffaf3;
-      --line: #ddcdbc;
-      --accent: #a45f43;
-      --accent-dark: #76422f;
-      --soft: #efe1d1;
-      --green: #6f8066;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 8% 5%, rgba(208, 170, 134, .23), transparent 30rem),
-        var(--paper);
-    }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-
-    header {
-      padding: 24px 0;
-      border-bottom: 1px solid rgba(164, 95, 67, .16);
-      background: rgba(248, 241, 231, .88);
-      backdrop-filter: blur(14px);
-      position: sticky;
-      top: 0;
-      z-index: 5;
-    }
-    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
-    .brand { display: flex; align-items: center; gap: 13px; font-weight: 800; letter-spacing: .12em; }
-    .brand-mark {
-      width: 40px; height: 40px; display: grid; place-items: center;
-      color: var(--paper); background: var(--accent); border-radius: 13px;
-      font-size: 15px; letter-spacing: 0;
-    }
-    .brand small { display: block; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .16em; margin-top: 3px; }
-    .status { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 13px; }
-    .status i { width: 7px; height: 7px; border-radius: 99px; background: var(--green); box-shadow: 0 0 0 4px rgba(111,128,102,.13); }
-    .top-link {
-      display: inline-flex; align-items: center; justify-content: center;
-      border: 1px solid rgba(164, 95, 67, .25);
-      border-radius: 999px; background: var(--card); color: var(--ink);
-      padding: 8px 12px; font-size: 12px; line-height: 1.4;
-      box-shadow: 0 10px 22px rgba(46, 41, 37, .05);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .top-link:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(46, 41, 37, .09); }
-
-    .hero { padding: 75px 0 45px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: end; }
-    .eyebrow { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .19em; font-size: 11px; }
-    h1 { max-width: 720px; margin: 15px 0 20px; font-family: Georgia, serif; font-size: clamp(48px, 8vw, 92px); line-height: .94; font-weight: 500; letter-spacing: -.055em; }
-    .hero p { max-width: 550px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
-    .hero-note { border-left: 1px solid var(--accent); padding: 10px 0 10px 26px; color: var(--muted); line-height: 1.6; }
-    .hero-note strong { display: block; margin-bottom: 8px; color: var(--ink); font-family: Georgia, serif; font-size: 24px; font-weight: 500; }
-
-    .tabs { display: flex; gap: 8px; padding: 6px; margin: 6px 0 34px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,250,243,.62); width: fit-content; }
-    .tab { display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; padding: 11px 18px; color: var(--muted); background: transparent; cursor: pointer; transition: .2s ease; text-decoration: none; }
-    .tab:hover { color: var(--ink); background: var(--soft); }
-    .tab.active { color: var(--paper); background: var(--ink); }
-    .panel { display: none; animation: appear .25s ease; }
-    .panel.active { display: block; }
-    @keyframes appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
-    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 23px; }
-    h2 { margin: 0; font-family: Georgia, serif; font-size: 35px; font-weight: 500; letter-spacing: -.04em; }
-    .subtle { color: var(--muted); font-size: 14px; }
-    .week-switch { display: flex; padding: 4px; border-radius: 10px; background: var(--soft); }
-    .week-switch button { border: 0; border-radius: 7px; padding: 9px 14px; color: var(--muted); background: transparent; cursor: pointer; font-size: 13px; }
-    .week-switch button.active { color: var(--ink); background: var(--card); box-shadow: 0 2px 8px rgba(75,49,33,.1); font-weight: 700; }
-    .schedule { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-    .day { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
-    .day-title { padding: 17px 16px 14px; border-bottom: 1px solid var(--line); background: #f2e6d7; }
-    .day-title strong { display: block; font-size: 16px; }
-    .day-title span { color: var(--muted); font-size: 12px; }
-    .lesson { min-height: 126px; padding: 14px 15px; border-bottom: 1px solid var(--line); }
-    .lesson:last-child { border-bottom: 0; }
-    .time { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .03em; }
-    .subject { margin: 10px 0 8px; font-weight: 700; line-height: 1.3; font-size: 14px; }
-    .teacher, .room { color: var(--muted); font-size: 12px; line-height: 1.4; }
-    .room { display: inline-block; margin-top: 8px; padding: 3px 7px; border-radius: 5px; background: var(--soft); }
-    .empty { color: #ae9f91; font-size: 13px; padding-top: 16px; }
-
-    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .info-card { min-height: 190px; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
-    .info-card .number { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
-    .info-card h3 { margin: 18px 0 9px; font-family: Georgia, serif; font-size: 24px; font-weight: 500; }
-    .info-card p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
-    .contact { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding: 20px; border-radius: 14px; background: var(--ink); color: var(--paper); }
-    .contact b { font-family: Georgia, serif; font-size: 20px; font-weight: 500; }
-    .contact span { color: #cdbbae; font-size: 13px; }
-    .resource-list { display: grid; gap: 10px; max-width: 730px; }
-    .resource { display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 19px 21px; border: 1px solid var(--line); border-radius: 13px; background: var(--card); }
-    .resource strong { display: block; margin-bottom: 4px; }
-    .resource span { color: var(--muted); font-size: 13px; }
-    .arrow { color: var(--accent); font-size: 20px; }
-    .media-section { display: grid; gap: 28px; }
-    .media-block h3 { width: min(100%, 900px); margin: 0 auto 12px; font-family: Georgia, serif; font-size: 26px; font-weight: 500; }
-    .media-carousel { position: relative; width: min(100%, 900px); margin: 0 auto; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--card); box-shadow: 0 10px 24px rgba(46,41,37,.06); }
-    .media-track { display: flex; transition: transform .3s ease; }
-    .media-tile { position: relative; min-width: 100%; margin: 0; overflow: hidden; aspect-ratio: 16 / 9; min-height: 0; border: 0; background: var(--card); }
-    .photo-carousel .media-tile { cursor: zoom-in; }
-    .photo-carousel img, .video-tile video { display: block; width: 100%; height: 100%; object-fit: contain; }
-    .photo-carousel img { background: #f2e6d7; transition: transform .3s ease; }
-    .video-tile video { background: #2e2925; }
-    .carousel-button { position: absolute; top: 50%; z-index: 1; width: 38px; height: 38px; border: 0; border-radius: 50%; color: var(--paper); background: rgba(46,41,37,.78); cursor: pointer; transform: translateY(-50%); }
-    .carousel-button:hover { background: var(--accent); }
-    .carousel-button.previous { left: 12px; }
-    .carousel-button.next { right: 12px; }
-    .carousel-dots { display: flex; justify-content: center; gap: 7px; padding: 12px; background: var(--card); }
-    .carousel-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: var(--line); cursor: pointer; }
-    .carousel-dot.active { background: var(--accent); transform: scale(1.25); }
-    .photo-carousel .media-tile:hover img { transform: scale(1.02); }
-    .fullscreen-button { position: absolute; right: 10px; bottom: 10px; border: 0; border-radius: 8px; padding: 7px 10px; color: #fff; background: rgba(46,41,37,.78); cursor: pointer; }
-    .fullscreen-button:hover { background: var(--accent); }
-    .image-modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 28px; background: rgba(28,23,20,.88); opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease; }
-    .image-modal.open { opacity: 1; visibility: visible; }
-    .image-modal img { max-width: min(1100px, 94vw); max-height: 88vh; border-radius: 12px; box-shadow: 0 20px 70px rgba(0,0,0,.4); object-fit: contain; }
-    .modal-close { position: absolute; top: 18px; right: 22px; border: 0; color: #fff; background: transparent; cursor: pointer; font-size: 34px; line-height: 1; }
-    .coming-soon { min-height: 240px; display: grid; place-items: center; padding: 34px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); text-align: center; }
-    .coming-soon p { max-width: 620px; margin: 0; font-family: Georgia, serif; color: var(--ink); font-size: clamp(24px, 4vw, 42px); line-height: 1.15; }
-    .homework-layout { display: grid; gap: 18px; }
-    .homework-form { display: grid; grid-template-columns: 1fr 1.5fr 180px auto; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
-    .homework-form input, .homework-form select { min-width: 0; border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; color: var(--ink); background: #fffdf8; }
-    .homework-form button { border: 0; border-radius: 9px; padding: 11px 16px; color: var(--paper); background: var(--ink); cursor: pointer; font-weight: 700; }
-    .homework-form button:hover { background: var(--accent); }
-    .homework-status { min-height: 18px; color: var(--muted); font-size: 13px; }
-    .homework-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .homework-card { display: grid; grid-template-columns: 14px 1fr; gap: 12px; padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
-    .traffic-light { width: 14px; height: 14px; margin-top: 4px; border-radius: 50%; background: #aaa; box-shadow: 0 0 0 5px rgba(170,170,170,.14); }
-    .homework-card.green .traffic-light { background: #6f9c63; box-shadow: 0 0 0 5px rgba(111,156,99,.16); }
-    .homework-card.yellow .traffic-light { background: #d7a83e; box-shadow: 0 0 0 5px rgba(215,168,62,.16); }
-    .homework-card.red .traffic-light { background: #c95b4c; box-shadow: 0 0 0 5px rgba(201,91,76,.16); }
-    .homework-card.gray .traffic-light { background: #9c9c9c; box-shadow: 0 0 0 5px rgba(156,156,156,.14); }
-    .homework-card h3 { margin: 0 0 7px; font-size: 16px; }
-    .homework-card p { margin: 0 0 8px; color: var(--muted); line-height: 1.45; font-size: 14px; }
-    .homework-card time { color: var(--accent); font-size: 12px; font-weight: 800; }
-    @media (max-width: 760px) { .homework-form, .homework-list { grid-template-columns: 1fr; } }
-    .duty-layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
-    .duty-card { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
-    .duty-card h3 { margin: 0 0 15px; font-family: Georgia, serif; font-size: 24px; font-weight: 500; }
-    .student-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; counter-reset: student; }
-    .student-list li { display: flex; gap: 9px; padding: 7px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 13px; }
-    .student-list li::before { width: 22px; color: var(--accent); content: counter(student, decimal-leading-zero); counter-increment: student; font-weight: 800; }
-    .duty-meta { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 17px; }
-    .duty-meta p { margin: 0; color: var(--muted); font-size: 13px; }
-    .duty-months { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .month { overflow: hidden; border: 1px solid var(--line); border-radius: 11px; }
-    .month h4 { margin: 0; padding: 10px 13px; background: var(--soft); font-size: 14px; }
-    .duty-row { display: grid; grid-template-columns: 90px 1fr; gap: 10px; padding: 9px 13px; border-top: 1px solid var(--line); font-size: 12px; }
-    .duty-row time { color: var(--accent); font-weight: 800; }
-    .duty-row span { display: flex; align-items: center; gap: 8px; font-weight: 700; }
-    .duty-row.today { background: #fff3df; }
-    .duty-row.today time { color: var(--accent-dark); }
-    .duty-dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: #d7743e; box-shadow: 0 0 0 4px rgba(215,116,62,.16), 0 0 12px rgba(215,116,62,.9); animation: duty-pulse 1.5s ease-in-out infinite; }
-    @keyframes duty-pulse { 0%, 100% { opacity: .65; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.2); } }
-
-    img, video, iframe { max-width: 100%; }
-    footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 80px; padding: 23px 0 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
-    footer strong { color: var(--ink); letter-spacing: .1em; }
-    @media (max-width: 980px) {
-      .shell { width: min(100% - 28px, 1180px); }
-      .header-row { flex-direction: column; align-items: flex-start; }
-      .header-actions { justify-content: flex-start; }
-      .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 55px; }
-      .schedule { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .info-grid, .duty-layout { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
-      .shell { width: min(100% - 22px, 1180px); }
-      .brand { letter-spacing: .08em; }
-      .header-row { align-items: stretch; }
-      .header-actions { width: 100%; }
-      .top-link { width: 100%; justify-content: center; }
-      .status { font-size: 11px; }
-      .tabs { width: 100%; overflow-x: auto; justify-content: flex-start; }
-      .tab { flex: 0 0 auto; white-space: nowrap; padding: 10px 12px; font-size: 13px; }
-      .section-head { align-items: flex-start; flex-direction: column; }
-      .week-switch { width: 100%; } .week-switch button { flex: 1; }
-      .schedule { grid-template-columns: 1fr; }
-      .day { display: grid; grid-template-columns: 110px 1fr; }
-      .day-title { border-right: 1px solid var(--line); border-bottom: 0; }
-      .lesson { min-height: 110px; }
-      .duty-months { grid-template-columns: 1fr; }
-      .duty-row { grid-template-columns: 82px 1fr; }
-      footer { margin-top: 50px; flex-direction: column; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/auth.css">
 </head>
-<body>
+<body class="auth-pending">
+  <div class="site-loader" id="site-loader" role="status" aria-live="polite">
+    <div class="loader-mark">А26</div>
+    <div class="loader-track"><span></span></div>
+    <p>Загружаем портал АЭС-26</p>
+  </div>
+  <section class="auth-gate" id="auth-gate" aria-labelledby="auth-title" hidden>
+    <div class="auth-card">
+      <div class="auth-brand-mark">А26</div>
+      <p class="auth-eyebrow">Портал в чудо</p>
+      <h1 id="auth-title">Добро пожаловать</h1>
+      <p class="auth-intro">Войдите или зарегистрируйтесь, чтобы открыть сайт и участвовать в общей статистике.</p>
+      <form id="auth-form">
+        <label id="auth-nickname-label" hidden>Никнейм
+          <input id="auth-nickname" name="nickname" type="text" maxlength="24" autocomplete="nickname" placeholder="Как вас показывать в рейтинге">
+        </label>
+        <label>Email
+          <input id="auth-email" name="email" type="email" required autocomplete="email" placeholder="name@example.com">
+        </label>
+        <label>Пароль
+          <input id="auth-password" name="password" type="password" required minlength="6" autocomplete="current-password" placeholder="Не менее 6 символов">
+        </label>
+        <p id="auth-error" class="auth-message" role="alert"></p>
+        <button class="auth-submit" id="auth-submit" type="submit">Войти</button>
+      </form>
+      <button class="auth-google" id="auth-google" type="button">Продолжить с Google</button>
+      <button class="auth-mode-switch" id="auth-mode-switch" type="button">Нет аккаунта? Зарегистрироваться</button>
+      <p class="auth-privacy">В рейтинге отображаются только никнейм и активное время. Email не публикуется.</p>
+    </div>
+  </section>
   <header>
     <div class="shell header-row">
       <a class="brand" href="#">
@@ -210,39 +46,111 @@
       </a>
       <div class="header-actions">
         <div class="status"><i></i> учебный портал · 2026/27</div>
-        <a class="top-link" href="methodics.html" aria-label="Методички">Методички</a>
-        <a class="top-link" href="https://t.me/addstickers/nuclearpowerplant26" target="_blank" rel="noreferrer noopener">Добавить наш стикер пак в TG</a>
+        <span class="signed-in-name" id="profile-name"></span>
+        <div class="menu-wrap">
+          <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+            <span class="menu-toggle-label">Навигация</span><span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+          <nav class="site-menu" id="site-menu" aria-label="Главное меню" hidden>
+            <div class="menu-heading">
+              <div><span class="menu-kicker">АЭС-26 · МЭИ</span><h2>Меню портала</h2></div>
+              <button class="menu-close" id="menu-close" type="button" aria-label="Закрыть меню">×</button>
+            </div>
+            <div class="menu-section-title">Разделы</div>
+            <div class="menu-grid">
+              <button class="menu-item tab active" type="button" data-tab="home"><span class="menu-item-mark">00</span>Главная</button>
+              <button class="menu-item tab" type="button" data-tab="schedule"><span class="menu-item-mark">01</span>Расписание</button>
+              <button class="menu-item tab" type="button" data-tab="group"><span class="menu-item-mark">02</span>Дежурства</button>
+              <button class="menu-item tab" type="button" data-tab="about"><span class="menu-item-mark">03</span>О нас</button>
+              <button class="menu-item tab" type="button" data-tab="homework"><span class="menu-item-mark">04</span>Домашние задания</button>
+              <button class="menu-item tab" type="button" data-tab="statistics"><span class="menu-item-mark">05</span>Статистика</button>
+              <button class="menu-item tab" type="button" data-tab="members"><span class="menu-item-mark">06</span>Участники</button>
+            </div>
+            <div class="menu-section-title">Материалы</div>
+            <div class="menu-shortcuts">
+              <a class="menu-item menu-link" href="methodics.html"><span class="shortcut-icon">М</span>Методички <span class="menu-arrow" aria-hidden="true">↗</span></a>
+              <a class="menu-item menu-link" href="https://t.me/addstickers/nuclearpowerplant26" target="_blank" rel="noreferrer noopener"><span class="shortcut-icon">✦</span>Стикерпак Telegram <span class="menu-arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <div class="menu-theme-block">
+              <div class="theme-heading"><div><strong>Цвет оформления</strong><span>Выберите настроение сайта</span></div></div>
+              <div class="theme-options" aria-label="Выбрать цвет оформления">
+              <button class="theme-swatch" type="button" data-theme-choice="terracotta" aria-label="Терракотовый" title="Терракотовый"></button>
+              <button class="theme-swatch" type="button" data-theme-choice="ocean" aria-label="Морской" title="Морской"></button>
+              <button class="theme-swatch" type="button" data-theme-choice="sage" aria-label="Шалфейный" title="Шалфейный"></button>
+              <button class="theme-swatch" type="button" data-theme-choice="plum" aria-label="Сливовый" title="Сливовый"></button>
+              <button class="theme-swatch" type="button" data-theme-choice="midnight" aria-label="Полуночный" title="Полуночный"></button>
+              <button class="theme-swatch" type="button" data-theme-choice="rose" aria-label="Розовый" title="Розовый"></button>
+              <button class="theme-swatch" type="button" data-theme-choice="amber" aria-label="Янтарный" title="Янтарный"></button>
+              <button class="theme-swatch" type="button" data-theme-choice="slate" aria-label="Графитовый" title="Графитовый"></button>
+              </div>
+            </div>
+            <button class="menu-item sign-out-button" id="sign-out" type="button">Выйти из аккаунта</button>
+          </nav>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="shell">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Атомные электростанции и установки</div>
-        <h1>Всё важное<br>для АЭС-26.</h1>
-        <p>Расписание занятий, полезные материалы — в одном спокойном и удобном пространстве.</p>
+    <section class="panel active" id="home">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">Атомные электростанции и установки</div>
+          <h1>Всё важное<br>для АЭС-26.</h1>
+          <p>Расписание занятий, полезные материалы — в одном спокойном и удобном пространстве.</p>
+        </div>
+        <div class="hero-note"><strong>Добро пожаловать</strong>Выберите нужный раздел — всё для учёбы и жизни группы собрано здесь.</div>
       </div>
-      <div class="hero-note"><strong>Добро пожаловать</strong>Здесь можно быстро проверить пару, аудиторию и план на учебную неделю.</div>
+      <div class="home-section-heading">
+        <div><span class="menu-kicker">ПОРТАЛ АЭС-26</span><h2>Куда перейдём?</h2></div>
+        <span class="subtle">Выберите раздел, чтобы начать</span>
+      </div>
+      <div class="home-destinations">
+        <button class="home-destination home-destination-featured" type="button" data-tab="schedule">
+          <span class="home-destination-icon" aria-hidden="true">◷</span><span class="home-destination-copy"><strong>Расписание</strong><small>Пары сегодня и план на неделю</small></span><span class="home-destination-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="home-destination" type="button" data-tab="group">
+          <span class="home-destination-icon" aria-hidden="true">↻</span><span class="home-destination-copy"><strong>Дежурства</strong><small>График и список группы</small></span><span class="home-destination-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="home-destination" type="button" data-tab="about">
+          <span class="home-destination-icon" aria-hidden="true">✦</span><span class="home-destination-copy"><strong>О нас</strong><small>Фотографии и видео группы</small></span><span class="home-destination-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="home-destination" type="button" data-tab="homework">
+          <span class="home-destination-icon" aria-hidden="true">✓</span><span class="home-destination-copy"><strong>Домашние задания</strong><small>Общая доска заданий и сроков</small></span><span class="home-destination-arrow" aria-hidden="true">↗</span>
+        </button>
+        <a class="home-destination" href="methodics.html">
+          <span class="home-destination-icon" aria-hidden="true">М</span><span class="home-destination-copy"><strong>Методички</strong><small>Учебные материалы по предметам</small></span><span class="home-destination-arrow" aria-hidden="true">↗</span>
+        </a>
+        <button class="home-destination" type="button" data-tab="statistics">
+          <span class="home-destination-icon" aria-hidden="true">⌁</span><span class="home-destination-copy"><strong>Статистика</strong><small>Активность участников портала</small></span><span class="home-destination-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="home-destination" type="button" data-tab="members">
+          <span class="home-destination-icon" aria-hidden="true">◎</span><span class="home-destination-copy"><strong>Участники</strong><small>Кто в сети и список группы</small></span><span class="home-destination-arrow" aria-hidden="true">↗</span>
+        </button>
+      </div>
     </section>
 
-    <nav class="tabs" aria-label="Разделы сайта">
-      <button class="tab active" data-tab="schedule">Расписание</button>
-      <button class="tab" data-tab="group">График дежурств</button>
-      <button class="tab" data-tab="about">О нас</button>
-      <button class="tab" data-tab="homework">Д/З</button>
-      <button class="tab" data-tab="coming-soon">coming soon</button>
-    </nav>
-
-    <section class="panel active" id="schedule">
+    <section class="panel" id="schedule">
       <div class="section-head">
-        <div><h2>Учебная неделя</h2><div class="subtle">Время начала и окончания каждой пары указано в карточке.</div></div>
-        <div class="week-switch" aria-label="Выбор недели">
-          <button class="active" data-week="even">Чётная неделя</button>
-          <button data-week="odd">Нечётная неделя</button>
-        </div>
+        <div><h2 id="schedule-heading">Сегодня</h2><div class="subtle" id="schedule-date"></div></div>
+        <button class="schedule-view-toggle" id="toggle-full-schedule" type="button" aria-expanded="false" aria-controls="full-schedule">Полное расписание</button>
       </div>
-      <div class="schedule" id="schedule-grid"></div>
+      <section class="today-schedule" id="today-schedule">
+        <div class="schedule-now" id="schedule-now"></div>
+        <div class="today-lessons" id="today-lessons"></div>
+        <p class="schedule-finished" id="schedule-finished" hidden>На сегодня пары закончились. До завтра!</p>
+      </section>
+      <section class="full-schedule" id="full-schedule" hidden>
+        <div class="section-head full-schedule-head">
+          <div><h3>Расписание на неделю</h3><div class="subtle">Время начала и окончания каждой пары указано в карточке.</div></div>
+          <div class="week-switch" aria-label="Выбор недели">
+            <span class="subtle">Текущая неделя выбирается автоматически</span>
+            <button class="active" data-week="even">Чётная неделя</button>
+            <button data-week="odd">Нечётная неделя</button>
+          </div>
+        </div>
+        <div class="schedule" id="schedule-grid"></div>
+      </section>
     </section>
 
     <section class="panel" id="group">
@@ -301,226 +209,103 @@
       </div>
     </section>
 
-    <section class="panel" id="coming-soon">
-      <div class="section-head"><div><h2>coming soon</h2><div class="subtle">Место для следующей идеи.</div></div></div>
-      <div class="coming-soon"><p>Как у Неонова будет новая идея, что можно сюда впихнуть, оно сразу появится</p></div>
+    <section class="panel" id="statistics">
+      <div class="section-head"><div><h2>Статистика</h2><div class="subtle">Рейтинг по времени, проведённому с открытой вкладкой сайта.</div></div></div>
+      <div class="statistics-summary" id="statistics-summary" role="status">Загружаем статистику…</div>
+      <ol class="leaderboard" id="leaderboard"></ol>
     </section>
 
-    <footer><strong>АЭС-26</strong><span>Разработчик by neonov · сделано с вниманием к деталям</span></footer>
+    <section class="panel" id="members">
+      <div class="section-head"><div><h2>Участники</h2><div class="subtle">Зарегистрированные пользователи и их статус на сайте.</div></div></div>
+      <div class="presence-legend" aria-label="Обозначения статуса">
+        <span><i class="presence-indicator online"></i>В сети</span>
+        <span><i class="presence-indicator idle"></i>Неактивен</span>
+        <span><i class="presence-indicator offline"></i>Не в сети</span>
+      </div>
+      <p class="statistics-summary" id="members-status" role="status">Загружаем список участников…</p>
+      <div class="members-list" id="members-list"></div>
+    </section>
+
+    <footer><strong>АЭС-26</strong><span>Разработчик by neonov</span></footer>
   </main>
   <div class="image-modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Увеличенная фотография">
     <button class="modal-close" type="button" aria-label="Закрыть увеличенное фото">×</button>
     <img src="" alt="">
   </div>
+  <aside class="help-widget" id="help-widget" aria-label="Обратная связь и чат" hidden>
+    <section class="help-panel" id="help-panel" aria-labelledby="help-title" hidden>
+      <header class="help-header">
+        <div><span class="menu-kicker">АЭС-26 · НА СВЯЗИ</span><h2 id="help-title">Что открыть?</h2></div>
+        <button class="help-close" id="help-close" type="button" aria-label="Свернуть меню">−</button>
+      </header>
+      <div class="help-view" id="help-options">
+        <button class="help-option" type="button" data-help-view="suggestion"><span>✦</span><span><strong>Предложение по улучшению</strong><small>Поделитесь идеей для сайта</small></span><b aria-hidden="true">›</b></button>
+        <button class="help-option" type="button" data-help-view="complaint"><span>!</span><span><strong>Жалоба по сайту</strong><small>Расскажите о проблеме</small></span><b aria-hidden="true">›</b></button>
+        <button class="help-option" type="button" data-help-view="chat"><span>☻</span><span><strong>Чат студентов</strong><small>Общайтесь с участниками группы</small></span><b aria-hidden="true">›</b></button>
+        <button class="help-option admin-feedback-option" id="open-feedback-inbox" type="button" data-help-view="feedback-inbox" hidden><span>▤</span><span><strong>Обращения</strong><small>Предложения и жалобы пользователей</small></span><b aria-hidden="true">›</b></button>
+      </div>
+      <section class="help-view help-form-view" id="help-feedback" hidden>
+        <button class="help-back" type="button" data-help-back>← Назад</button>
+        <h3 id="feedback-heading"></h3>
+        <form id="feedback-form">
+          <label class="visually-hidden" for="feedback-message">Сообщение</label>
+          <textarea id="feedback-message" maxlength="2000" rows="5" required placeholder="Напишите сообщение (от 5 до 2000 символов)"></textarea>
+          <p class="help-status" id="feedback-status" role="status"></p>
+          <button class="help-submit" id="feedback-submit" type="submit">Отправить обращение</button>
+        </form>
+      </section>
+      <section class="help-view help-chat-view" id="help-chat" hidden>
+        <div class="chat-toolbar">
+          <button class="help-back" type="button" data-help-back>← Назад</button>
+          <strong>Чат студентов</strong>
+          <button class="chat-fullscreen-toggle" id="chat-fullscreen-toggle" type="button" aria-label="Открыть чат на весь экран" aria-pressed="false">⛶</button>
+        </div>
+        <button class="chat-load-older" id="chat-load-older" type="button" hidden>Показать предыдущие сообщения</button>
+        <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
+          <p class="chat-placeholder">Загружаем сообщения…</p>
+        </div>
+        <form class="chat-form" id="chat-form">
+          <div class="chat-typing-indicator" id="chat-typing-indicator" role="status" aria-live="polite"></div>
+          <label class="visually-hidden" for="chat-message">Сообщение в чат</label>
+          <textarea id="chat-message" maxlength="1000" rows="2" required placeholder="Сообщение…"></textarea>
+          <div class="chat-compose-row">
+            <div class="chat-emoji-list" aria-label="Добавить эмодзи">
+              <button type="button" data-emoji="😀" aria-label="Добавить улыбку">😀</button>
+              <button type="button" data-emoji="😂" aria-label="Добавить смех">😂</button>
+              <button type="button" data-emoji="❤️" aria-label="Добавить сердце">❤️</button>
+              <button type="button" data-emoji="👍" aria-label="Добавить лайк">👍</button>
+              <button type="button" data-emoji="🎉" aria-label="Добавить праздник">🎉</button>
+              <button class="chat-stickers" type="button" disabled title="Стикеры появятся позже">▧</button>
+            </div>
+            <button class="help-submit" id="chat-submit" type="submit">Отправить</button>
+          </div>
+          <p class="help-status" id="chat-status" role="status">Enter — отправить, Shift+Enter — новая строка.</p>
+        </form>
+      </section>
+      <section class="help-view feedback-inbox-view" id="feedback-inbox" hidden>
+        <div class="inbox-toolbar">
+          <button class="help-back" type="button" data-help-back>← Назад</button>
+          <label class="visually-hidden" for="feedback-filter">Фильтр обращений</label>
+          <select id="feedback-filter" aria-label="Фильтр обращений">
+            <option value="all">Все обращения</option>
+            <option value="suggestion">Предложения</option>
+            <option value="complaint">Жалобы</option>
+          </select>
+        </div>
+        <p class="help-status" id="feedback-inbox-status" role="status">Загрузка обращений…</p>
+        <div class="feedback-inbox-list" id="feedback-inbox-list"></div>
+      </section>
+    </section>
+    <button class="help-launcher" id="help-launcher" type="button" aria-expanded="false" aria-controls="help-panel">
+      <span class="help-launcher-icon" aria-hidden="true">✦</span><span></span>
+    </button>
+  </aside>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: 'AIzaSyBKqtixYVjsUxW-dNjz8Cnl6BAJWvaU2zs',
-      authDomain: 'aes-26.firebaseapp.com',
-      projectId: 'aes-26',
-      storageBucket: 'aes-26.firebasestorage.app',
-      messagingSenderId: '304768334581',
-      appId: '1:304768334581:web:6a72d5c389d585f891e3bc'
-    };
-    firebase.initializeApp(firebaseConfig);
-    const homeworkDb = firebase.firestore();
-    const schedule = {
-      even: [
-        { day: 'Понедельник', date: '1 день', lessons: [
-          ['08:30 — 10:00', 'Нет пары', '', ''],
-          ['10:15 — 11:45', 'У Физика', 'доц. Широких Т. В.', '521'],
-          ['12:00 — 13:30', 'ЛК Водоподготовка на АЭС', 'доц. Любова Т. С.', '529'],
-          ['14:00 — 15:30', 'У Водоподготовка на АЭС', 'доц. Любова Т. С.', '529']
-        ]},
-        { day: 'Вторник', date: '2 день', lessons: [
-          ['08:30 — 10:00', 'ЛК Общественная проектная работа «Обучение служением»', 'доц. Нагорная А. Г.', 'А 1'],
-          ['10:15 — 11:45', 'У Информационные технологии', 'асс. Овсянникова А. С.', 'А 304'],
-          ['12:00 — 13:30', 'У Высшая математика', 'ст. пр. Волкова Ю. Е.', '405'],
-          ['14:00 — 15:30', 'Нет пары', '', '']
-        ]},
-        { day: 'Среда', date: '3 день', lessons: [
-          ['08:30 — 10:00', 'ЛК Высшая математика', 'проф. Бобков В. И.', '402'],
-          ['10:15 — 11:45', 'ЛК Физическая культура и спорт', 'доц. Соколова Т. М.', 'А 4'],
-          ['12:00 — 13:30', 'Нет пары', '', ''],
-          ['14:00 — 15:30', 'Нет пары', '', '']
-        ]},
-        { day: 'Четверг', date: '4 день', lessons: [
-          ['08:30 — 10:00', 'У Основы российской государственности', 'ст. пр. Чиков С. С.', '227'],
-          ['10:15 — 11:45', 'У Общественная проектная работа «Обучение служением»', 'доц. Нагорная А. Г.', '518'],
-          ['12:00 — 13:30', 'ЛК Информационные технологии', 'доц. Кабанова М. А.', '425'],
-          ['14:00 — 15:30', 'Элективные курсы по физической культуре и спорту', '', '']
-        ]},
-        { day: 'Пятница', date: '5 день', lessons: [
-          ['08:30 — 10:00', 'ЛБ Инженерная и компьютерная графика', 'доц. Гончарова И. А.', 'Б 209'],
-          ['10:15 — 11:45', 'ЛК Инженерная и компьютерная графика', 'доц. Гончарова И. А.', '402'],
-          ['12:00 — 13:30', 'Элективные курсы по физической культуре и спорту', '', ''],
-          ['14:00 — 15:30', 'Нет пары', '', '']
-        ]}
-      ],
-      odd: [
-        { day: 'Понедельник', date: '1 день', lessons: [['08:30 — 10:00', 'ЛК Информационные технологии', 'асс. Овсянникова А. С. · 1 пгр. 3,7,11,15 н. · 2 пгр. 5,9,13,17 н. · 1 и 2 пара', 'А 304'], ['10:15 — 11:45', 'ЛБ Информационные технологии', 'асс. Овсянникова А. С.', 'А 304'], ['12:00 — 13:30', 'У Высшая математика', 'ст. пр. Волкова Ю. Е.', '406'], ['14:00 — 15:30', 'У Общественная проектная работа «Обучение служением»', 'доц. Нагорная А. Г.', '518']]},
-        { day: 'Вторник', date: '2 день', lessons: [['08:30 — 10:00', 'ЛК Инженерная и компьютерная графика', 'доц. Гончарова И. А.', '509'], ['10:15 — 11:45', 'У Физика', 'доц. Широких Т. В.', '520'], ['12:00 — 13:30', 'ЛБ Физика', 'доц. Широких Т. В.', 'А 219'], ['14:00 — 15:30', 'Нет пары', '', '']]},
-        { day: 'Среда', date: '3 день', lessons: [['08:30 — 10:00', 'ЛК Высшая математика', 'проф. Бобков В. И.', '402'], ['10:15 — 11:45', 'ЛК Физика', 'доц. Широких Т. В.', '402'], ['12:00 — 13:30', 'ЛБ Инженерная и компьютерная графика', 'доц. Гончарова И. А.', '506'], ['14:00 — 15:30', 'Нет пары', '', '']]},
-        { day: 'Четверг', date: '4 день', lessons: [['08:30 — 10:00', 'Нет пары', '', ''], ['10:15 — 11:45', 'ЛК Основы российской государственности', 'ст. пр. Чиков С. С.', 'А 1'], ['12:00 — 13:30', 'ЛК Информационные технологии', 'доц. Кабанова М. А.', '425'], ['14:00 — 15:30', 'Элективные курсы по физической культуре и спорту', '', '']]},
-        { day: 'Пятница', date: '5 день', lessons: [['08:30 — 10:00', 'У Иностранный язык', 'ст. пр. Близнюк О. А.', '406'], ['10:15 — 11:45', 'У Основы российской государственности', 'ст. пр. Чиков С. С.', 'Б 105'], ['12:00 — 13:30', 'Элективные курсы по физической культуре и спорту', '', ''], ['14:00 — 15:30', 'Нет пары', '', '']]}
-      ]
-    };
-    const homeworkSubjects = [...new Set(Object.values(schedule).flat().flatMap(day => day.lessons
-      .map(([, subject]) => subject.replace(/^(ЛК|ЛБ|У)\s+/, ''))
-      .filter(subject => subject && subject !== 'Нет пары')))]
-      .sort((first, second) => first.localeCompare(second, 'ru'));
-    document.querySelector('#homework-subject').innerHTML = homeworkSubjects
-      .map(subject => `<option value="${subject}">${subject}</option>`).join('');
-    const homeworkList = document.querySelector('#homework-list');
-    const homeworkStatus = document.querySelector('#homework-status');
-    const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
-    }[character]));
-    function homeworkState(dateString) {
-      const dueDate = new Date(`${dateString}T00:00:00`);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const daysLeft = Math.ceil((dueDate - today) / 86400000);
-      if (daysLeft < 0) return { className: 'gray', label: 'Срок уже прошёл' };
-      if (daysLeft <= 1) return { className: 'red', label: daysLeft === 0 ? 'Сдать сегодня' : 'Сдать завтра' };
-      if (daysLeft <= 7) return { className: 'yellow', label: `Осталось ${daysLeft} дн.` };
-      return { className: 'green', label: `Осталось ${daysLeft} дн.` };
-    }
-    function renderHomework(snapshot) {
-      const homework = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      homeworkList.innerHTML = homework.length ? homework.map(item => {
-        const state = homeworkState(item.dueDate);
-        return `<article class="homework-card ${state.className}">
-          <span class="traffic-light" aria-label="${state.label}"></span>
-          <div><h3>${escapeHtml(item.subject)}</h3><p>${escapeHtml(item.title)}</p>
-          <time datetime="${escapeHtml(item.dueDate)}">${new Date(`${item.dueDate}T00:00:00`).toLocaleDateString('ru-RU')} · ${state.label}</time></div>
-        </article>`;
-      }).join('') : '<div class="subtle">Пока заданий нет. Добавьте первое.</div>';
-    }
-    homeworkDb.collection('homework').orderBy('dueDate').onSnapshot(renderHomework, error => {
-      homeworkStatus.textContent = 'Не удалось загрузить общую доску. Проверьте настройки Firestore.';
-      console.error('Не удалось загрузить домашние задания:', error);
-    });
-    document.querySelector('#homework-form').addEventListener('submit', async event => {
-      event.preventDefault();
-      const subject = document.querySelector('#homework-subject').value;
-      const titleInput = document.querySelector('#homework-title');
-      const dateInput = document.querySelector('#homework-date');
-      homeworkStatus.textContent = 'Добавление задания…';
-      try {
-        await homeworkDb.collection('homework').add({
-          subject,
-          title: titleInput.value.trim(),
-          dueDate: dateInput.value,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        titleInput.value = '';
-        dateInput.value = '';
-        homeworkStatus.textContent = 'Задание добавлено на общую доску.';
-      } catch (error) {
-        homeworkStatus.textContent = 'Не удалось добавить задание. Проверьте правила Firestore.';
-        console.error('Не удалось добавить домашнее задание:', error);
-      }
-    });
-    const grid = document.querySelector('#schedule-grid');
-    function renderWeek(week) {
-      grid.innerHTML = schedule[week].map(({ day, date, lessons }) => `
-        <article class="day"><div class="day-title"><strong>${day}</strong><span>${date}</span></div>
-          ${lessons.map(([time, subject, teacher, room]) => `<div class="lesson"><div class="time">${time}</div>${subject === 'Нет пары' ? '<div class="empty">Нет пары</div>' : `<div class="subject">${subject}</div>${teacher ? `<div class="teacher">${teacher}</div>` : ''}${room ? `<span class="room">${room}</span>` : ''}`}</div>`).join('')}
-        </article>`).join('');
-    }
-    renderWeek('even');
-    document.querySelectorAll('[data-week]').forEach(button => button.addEventListener('click', () => {
-      document.querySelectorAll('[data-week]').forEach(item => item.classList.remove('active'));
-      button.classList.add('active');
-      renderWeek(button.dataset.week);
-    }));
-    const students = [
-      'Богданов Иван Максимович', 'Денисов Александр Евгеньевич', 'Елисеев Сергей Владимирович',
-      'Зайцев Кирилл Александрович', 'Зайцев Никита Александрович', 'Калачёв Егор Семёнович',
-      'Каменьков Вячеслав Владиславович', 'Канабеев Даниил Александрович', 'Кирпа Мария Григорьевна',
-      'Климова Милена Витальевна', 'Ковалев Степан Сергеевич', 'Кривкин Иван Дмитриевич',
-      'Купреева Полина Сергеевна', 'Ларченков Валерий Валерьевич', 'Максимова Евгения Андреевна',
-      'Молодьков Данила Иванович', 'Никитин Даниил Иванович', 'Носенков Владислав Владимирович',
-      'Окунева Виктория Сергеевна', 'Орлова Милана Олеговна', 'Пархомец Дмитрий Александрович',
-      'Петрушина Мария Михайловна', 'Пожилов Александр Дмитриевич', 'Скутенков Владислав Дмитриевич',
-      'Спацкий Фёдор Андреевич', 'Филенкова Ксения Александровна'
-    ];
-    document.querySelector('#student-list').innerHTML = students.map(name => `<li>${name}</li>`).join('');
-    const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-    const dutyByMonth = {};
-    let studentIndex = 0;
-    for (let date = new Date(2026, 8, 1); date <= new Date(2027, 6, 1); date.setDate(date.getDate() + 1)) {
-      if (date.getDay() === 0 || date.getDay() === 6) continue;
-      const key = `${date.getFullYear()}-${date.getMonth()}`;
-      if (!dutyByMonth[key]) dutyByMonth[key] = { title: `${monthNames[date.getMonth()]} ${date.getFullYear()}`, rows: [] };
-      dutyByMonth[key].rows.push({ date: new Date(date), student: students[studentIndex % students.length] });
-      studentIndex++;
-    }
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    document.querySelector('#duty-months').innerHTML = Object.values(dutyByMonth).map(month => `
-      <section class="month"><h4>${month.title}</h4>${month.rows.map(row => {
-        const isToday = row.date.getTime() === today.getTime();
-        return `<div class="duty-row${isToday ? ' today' : ''}"><time>${String(row.date.getDate()).padStart(2, '0')}.${String(row.date.getMonth() + 1).padStart(2, '0')}</time><span>${isToday ? '<i class="duty-dot" aria-label="Дежурство сегодня"></i>' : ''}${row.student}</span></div>`;
-      }).join('')}</section>
-    `).join('');
-    document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(item => item.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(item => item.classList.remove('active'));
-      button.classList.add('active');
-      document.querySelector(`#${button.dataset.tab}`).classList.add('active');
-    }));
-    const imageModal = document.querySelector('#image-modal');
-    const modalImage = imageModal.querySelector('img');
-    function closeImageModal() {
-      imageModal.classList.remove('open');
-      modalImage.removeAttribute('src');
-    }
-    document.querySelectorAll('.photo-carousel img').forEach(image => image.addEventListener('click', () => {
-      modalImage.src = image.src;
-      modalImage.alt = image.alt;
-      imageModal.classList.add('open');
-    }));
-    imageModal.addEventListener('click', event => {
-      if (event.target === imageModal || event.target.closest('.modal-close')) closeImageModal();
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeImageModal();
-    });
-    document.querySelectorAll('.fullscreen-button').forEach(button => button.addEventListener('click', async () => {
-      const video = button.parentElement.querySelector('video');
-      if (video.requestFullscreen) await video.requestFullscreen();
-      else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
-    }));
-    document.querySelectorAll('[data-carousel]').forEach(carousel => {
-      const track = carousel.querySelector('.media-track');
-      const slides = [...carousel.querySelectorAll('.media-tile')];
-      const dots = carousel.querySelector('.carousel-dots');
-      let current = 0;
-      dots.innerHTML = slides.map((_, index) => `<button class="carousel-dot${index === 0 ? ' active' : ''}" type="button" aria-label="Открыть элемент ${index + 1}"></button>`).join('');
-      const dotButtons = [...dots.children];
-      function showSlide(index) {
-        current = (index + slides.length) % slides.length;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        dotButtons.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === current));
-        slides.forEach((slide, slideIndex) => {
-          const video = slide.querySelector('video');
-          if (video && slideIndex !== current) video.pause();
-        });
-      }
-      carousel.querySelector('.previous').addEventListener('click', () => showSlide(current - 1));
-      carousel.querySelector('.next').addEventListener('click', () => showSlide(current + 1));
-      dotButtons.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
-      let touchStartX = 0;
-      carousel.addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].screenX; }, { passive: true });
-      carousel.addEventListener('touchend', event => {
-        const distance = event.changedTouches[0].screenX - touchStartX;
-        if (Math.abs(distance) > 45) showSlide(current + (distance < 0 ? 1 : -1));
-      }, { passive: true });
-    });
-  </script>
+  <script src="js/site-auth.js" defer></script>
+  <script src="js/feedback-config.js" defer></script>
+  <script src="js/index.js" defer></script>
 </body>
 </html>
