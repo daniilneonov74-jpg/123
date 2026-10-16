@@ -78,6 +78,15 @@
     .home-destination-copy small { color: var(--muted); font-size: 11px; line-height: 1.4; }
     .home-destination-arrow { margin-left: auto; align-self: flex-start; color: var(--muted); font-size: 16px; }
     .home-destination:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 3px; }
+    .messenger-cta {
+      display: flex; width: fit-content; min-height: 64px; align-items: center; justify-content: center;
+      margin: 0 auto 30px; padding: 16px 34px; border: 0; border-radius: 18px;
+      color: #fff; background: #39834b; text-align: center; text-decoration: none;
+      font-size: 18px; font-weight: 800; box-shadow: 0 10px 24px rgba(57,131,75,.22);
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .messenger-cta:hover { transform: translateY(-2px); background: #2f713f; box-shadow: 0 14px 28px rgba(57,131,75,.3); }
+    .messenger-cta:focus-visible { outline: 3px solid color-mix(in srgb, #39834b 45%, transparent); outline-offset: 4px; }
 
     .tabs { display: flex; gap: 8px; padding: 6px; margin: 6px 0 34px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,250,243,.62); width: fit-content; }
     .tab { display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; padding: 11px 18px; color: var(--muted); background: transparent; cursor: pointer; transition: .2s ease; text-decoration: none; }
